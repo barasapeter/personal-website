@@ -1,0 +1,1166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Peter Barasa | Cloud-Native Backend & DevSecOps Engineer</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>◆</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #ffffff;
+    --bg-soft: #f7f6f3;
+    --surface: #ffffff;
+    --ink: #1c2024;
+    --ink-soft: #565c65;
+    --ink-faint: #90959d;
+    --line: #e4e1da;
+    --accent: #29415c;
+    --accent-soft: #eef1f4;
+    --gold: #a2793f;
+    --gold-soft: #f4ede1;
+    --shadow: 0 1px 2px rgba(28,32,36,0.04), 0 6px 20px rgba(28,32,36,0.05);
+    --radius: 8px;
+    --font-serif: 'Source Serif 4', Georgia, 'Times New Roman', serif;
+    --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --header-h: 74px;
+    color-scheme: light;
+  }
+
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg: #15171b;
+      --bg-soft: #1b1e23;
+      --surface: #1e2126;
+      --ink: #edeae3;
+      --ink-soft: #a4a9b3;
+      --ink-faint: #6d7278;
+      --line: #2c2f35;
+      --accent: #a9c1dd;
+      --accent-soft: #232a33;
+      --gold: #d3ac74;
+      --gold-soft: #2c2416;
+      --shadow: 0 1px 2px rgba(0,0,0,0.2), 0 8px 24px rgba(0,0,0,0.3);
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg: #15171b;
+    --bg-soft: #1b1e23;
+    --surface: #1e2126;
+    --ink: #edeae3;
+    --ink-soft: #a4a9b3;
+    --ink-faint: #6d7278;
+    --line: #2c2f35;
+    --accent: #a9c1dd;
+    --accent-soft: #232a33;
+    --gold: #d3ac74;
+    --gold-soft: #2c2416;
+    --shadow: 0 1px 2px rgba(0,0,0,0.2), 0 8px 24px rgba(0,0,0,0.3);
+    color-scheme: dark;
+  }
+
+  *{ box-sizing: border-box; }
+  html{
+    scroll-behavior: smooth;
+    scroll-padding-top: calc(var(--header-h, 74px) + 16px + env(safe-area-inset-top,0px));
+    scrollbar-gutter: stable;
+  }
+  body{
+    margin:0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    font-size: 16px;
+    line-height: 1.65;
+    padding-top: env(safe-area-inset-top,0px);
+    padding-bottom: env(safe-area-inset-bottom,0px);
+    -webkit-font-smoothing: antialiased;
+  }
+  img{ max-width:100%; display:block; }
+  a{ color:inherit; }
+  ::selection{ background: var(--accent); color: #fff; }
+  :focus-visible{ outline: 2px solid var(--accent); outline-offset:3px; }
+
+  .wrap{
+    width: 100%;
+    max-width: 980px;
+    margin-inline: auto;
+    padding-inline: clamp(20px, 4vw, 28px);
+  }
+
+  h1,h2,h3,h4{ font-family: var(--font-serif); font-weight:600; margin:0; color: var(--ink); }
+  p{ margin:0; }
+
+  header.nav{
+    position: sticky;
+    top: env(safe-area-inset-top,0px);
+    z-index: 80;
+    background: color-mix(in srgb, var(--bg) 88%, transparent);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+    transition: background-color .25s ease;
+  }
+  body.sidebar-locked header.nav{ background: var(--bg); }
+
+  .nav-inner{
+    width: 100%;
+    max-width: 980px;
+    margin-inline: auto;
+    padding-inline: clamp(20px, 4vw, 28px);
+    padding-block: 16px;
+    display:flex; align-items:center; justify-content:space-between; gap:20px;
+  }
+  .nav-id{
+    display:flex; align-items:center; gap:11px;
+    text-decoration:none; color: var(--ink);
+    font-family: var(--font-serif); font-weight:600; font-size:1.05rem;
+    min-width:0;
+  }
+  .nav-id img{
+    width:32px; height:32px; border-radius:50%; object-fit:cover;
+    border: 1px solid var(--line);
+    flex-shrink:0;
+  }
+  .nav-id span{
+    white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+  }
+
+  .menu-btn{
+    --line-w: 18px;
+    --line-h: 1.5px;
+    --line-gap: 5px;
+    --shift: calc(var(--line-h) + var(--line-gap));
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--line-gap);
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    border-radius: 8px;
+    background: transparent;
+    box-shadow: none;
+    cursor: pointer;
+    flex-shrink: 0;
+    -webkit-tap-highlight-color: transparent;
+    transition: background-color .15s ease;
+  }
+  .menu-btn:hover{ background: var(--accent-soft); }
+  .menu-btn:active{ background: color-mix(in srgb, var(--accent-soft) 60%, var(--line)); }
+
+  .menu-btn .bar{
+    display: block;
+    width: var(--line-w);
+    height: var(--line-h);
+    background: var(--ink);
+    border-radius: 1px;
+    transition: transform .3s cubic-bezier(.4, 0, .2, 1), opacity .2s ease;
+    will-change: transform, opacity;
+  }
+
+  .menu-btn[aria-expanded="true"] .bar:nth-child(1){
+    transform: translateY(var(--shift)) rotate(45deg);
+  }
+  .menu-btn[aria-expanded="true"] .bar:nth-child(2){
+    opacity: 0;
+  }
+  .menu-btn[aria-expanded="true"] .bar:nth-child(3){
+    transform: translateY(calc(-1 * var(--shift))) rotate(-45deg);
+  }
+
+  .sidebar-overlay{
+    position: fixed;
+    top: calc(var(--header-h, 74px) + env(safe-area-inset-top,0px));
+    left: 0; right: 0; bottom: 0;
+    background: rgba(20,22,26,0.35);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .28s ease;
+    z-index: 60;
+  }
+  .sidebar-overlay.open{ opacity: 1; pointer-events: auto; }
+
+  .sidebar{
+    position: fixed;
+    top: 0; right: 0;
+    height: 100%;
+    width: min(300px, 80vw);
+    padding-top: calc(var(--header-h, 74px) + env(safe-area-inset-top,0px));
+    background: var(--surface);
+    border-left: 1px solid var(--line);
+    box-shadow: -16px 0 40px -24px rgba(20,22,26,.35);
+    z-index: 70;
+    display: flex;
+    flex-direction: column;
+    transform: translateX(100%);
+    visibility: hidden;
+    transition: transform .28s cubic-bezier(.32,.72,.28,1), visibility 0s linear .28s;
+    will-change: transform;
+  }
+  .sidebar.open{
+    transform: translateX(0);
+    visibility: visible;
+    transition: transform .28s cubic-bezier(.32,.72,.28,1), visibility 0s;
+  }
+
+  nav.links{
+    display: flex; flex-direction: column; gap: 2px;
+    padding: 14px 12px;
+    overflow-y: auto;
+    flex: 1 1 auto;
+    font-size: 0.95rem;
+    -webkit-overflow-scrolling: touch;
+  }
+  nav.links a{
+    position: relative;
+    display: flex; align-items: center; gap: 13px;
+    text-decoration: none;
+    color: var(--ink-soft);
+    font-weight: 500;
+    padding: 12px 14px;
+    border-radius: 10px;
+    transition: background-color .18s ease, color .18s ease;
+  }
+  nav.links a svg{
+    width: 18px; height: 18px; flex-shrink: 0;
+    opacity: .65;
+    transition: opacity .18s ease, color .18s ease;
+  }
+  nav.links a:hover,
+  nav.links a:focus-visible{
+    background: var(--accent-soft);
+    color: var(--ink);
+  }
+  nav.links a:hover svg,
+  nav.links a:focus-visible svg{ opacity: 1; color: var(--accent); }
+
+  nav.links a.active{
+    background: var(--accent-soft);
+    color: var(--accent);
+    font-weight: 600;
+  }
+  nav.links a.active svg{ opacity: 1; color: var(--accent); }
+  nav.links a.active::before{
+    content: "";
+    position: absolute;
+    right: -12px; top: 50%;
+    transform: translateY(-50%);
+    width: 3px; height: 20px;
+    border-radius: 3px 0 0 3px;
+    background: var(--accent);
+  }
+
+  .sidebar-foot{
+    margin-top: auto;
+    padding: 14px 16px calc(16px + env(safe-area-inset-bottom,0px));
+    border-top: 1px solid var(--line);
+    display: flex; gap: 8px;
+  }
+  .sidebar-foot a{
+    flex: 1 1 0;
+    text-align: center;
+    text-decoration: none;
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: var(--ink-soft);
+    background: var(--bg-soft);
+    border: 1px solid var(--line);
+    padding: 9px 6px;
+    border-radius: 10px;
+    transition: color .18s ease, border-color .18s ease;
+  }
+  .sidebar-foot a:hover{ color: var(--accent); border-color: var(--accent); }
+
+  body.sidebar-locked{ overflow: hidden; }
+
+  @media (prefers-reduced-motion: reduce){
+    .sidebar, .sidebar-overlay, nav.links a, nav.links a svg,
+    .menu-btn .bar{
+      transition: none !important;
+    }
+  }
+
+  section{ padding-block: clamp(56px, 8vw, 88px); }
+  section.alt{ background: var(--bg-soft); }
+
+  .eyebrow{
+    font-size: 0.82rem;
+    color: var(--gold);
+    margin-bottom: 14px;
+    font-weight: 500;
+  }
+  h2{ font-size: clamp(1.6rem,2.8vw,2.15rem); margin-bottom:16px; letter-spacing:-0.01em; }
+  .lede{ color: var(--ink-soft); max-width:60ch; margin-bottom:clamp(28px,4vw,44px); font-size:1.06rem; }
+
+  .hero{
+    padding-block: clamp(36px, 6vw, 80px) clamp(44px, 7vw, 88px);
+  }
+  .hero-grid{
+    display: grid;
+    grid-template-columns: minmax(0, 1.12fr) minmax(0, 0.72fr);
+    gap: clamp(28px, 5vw, 60px);
+    align-items: center;
+  }
+  .hero .role{
+    font-size: clamp(0.82rem, 1.4vw, 0.95rem);
+    color: var(--gold);
+    font-weight: 500;
+    margin-bottom: 16px;
+  }
+  .hero h1{
+    font-size: clamp(1.9rem, 5.4vw, 3.1rem);
+    line-height: 1.13;
+    letter-spacing: -0.02em;
+    margin-bottom: 18px;
+    text-wrap: balance;
+  }
+  .hero p.desc{
+    color: var(--ink-soft);
+    font-size: clamp(1rem, 1.5vw, 1.08rem);
+    max-width: 52ch;
+    margin-bottom: 30px;
+  }
+  .hero-ctas{ display:flex; gap:12px; flex-wrap:wrap; }
+
+  .btn{
+    font-family: var(--font-sans);
+    font-size:0.92rem; font-weight:500;
+    padding:13px 24px; border-radius: 40px;
+    text-decoration:none; display:inline-flex; align-items:center; gap:8px;
+    border: 1px solid var(--line);
+    color: var(--ink);
+    transition: border-color .15s ease, background-color .15s ease;
+    white-space:nowrap;
+  }
+  .btn.primary{ background: var(--accent); border-color: var(--accent); color:#fff; }
+  .btn.primary:hover{ background: color-mix(in srgb, var(--accent) 85%, black); }
+  .btn:not(.primary):hover{ border-color: var(--accent); }
+
+  .btn-icon{
+    width: 1em;
+    height: 1em;
+    display: block;
+    flex-shrink: 0;
+  }
+
+  .hero-photo{
+    justify-self: end;
+    width: 100%;
+    max-width: 340px;
+    aspect-ratio: 4 / 5;
+    border-radius: var(--radius);
+    overflow: hidden;
+    border: 1px solid var(--line);
+    background: var(--bg-soft);
+    box-shadow: var(--shadow);
+  }
+  .hero-photo img{
+    width: 100%; height: 100%;
+    object-fit: cover;
+    object-position: center 22%;
+  }
+
+  .stat-strip{
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0,1fr));
+    gap: clamp(24px, 4vw, 48px);
+    margin-top: clamp(36px, 6vw, 60px);
+  }
+  .stat-strip .stat{ padding-block: 4px; }
+  .stat .num{
+    font-family: var(--font-serif);
+    font-size: clamp(1.35rem, 3vw, 1.7rem);
+    color: var(--accent);
+    display: block;
+    line-height: 1.2;
+  }
+  .stat .label{
+    font-size: 0.85rem;
+    color: var(--ink-faint);
+    margin-top: 6px;
+    display: block;
+  }
+
+  .quote-block{
+    font-family: var(--font-serif);
+    font-size: clamp(1.15rem, 2.2vw, 1.35rem);
+    line-height:1.5;
+    color: var(--ink);
+    max-width: 66ch;
+    margin: 0 0 clamp(32px,4vw,44px);
+    padding-left: clamp(16px,3vw,24px);
+    border-left: 3px solid var(--gold);
+  }
+  .motive-list{
+    display:grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 32px 40px;
+  }
+  .motive-list .item{ display:flex; gap:16px; }
+  .motive-list .mark{
+    font-family: var(--font-serif); color: var(--gold); font-size:1.2rem; flex-shrink:0; line-height:1.6;
+  }
+  .motive-list p{ color: var(--ink-soft); font-size:0.98rem; }
+
+  .role-chips{ display:flex; flex-wrap:wrap; gap:10px; margin-top:40px; }
+  .chip{
+    font-size:0.85rem; color: var(--ink-soft);
+    background: var(--accent-soft);
+    padding:7px 15px; border-radius:40px;
+  }
+
+  .arsenal-list{ display:flex; flex-direction:column; }
+  .arsenal-row{
+    display:grid;
+    grid-template-columns: minmax(180px, 240px) 1fr;
+    gap: clamp(16px, 4vw, 32px);
+    padding-block: clamp(24px, 3.5vw, 36px);
+  }
+  .arsenal-row h3{ font-size:1.12rem; }
+  .arsenal-row .kicker{ display:block; font-size:0.82rem; color: var(--gold); margin-bottom:6px; font-family: var(--font-sans); font-weight:500; }
+  .arsenal-row .tools{ color: var(--ink-faint); font-size:0.88rem; margin-top:10px; }
+  .arsenal-row ul{ margin:0; padding-left:18px; color: var(--ink-soft); font-size:0.95rem; }
+  .arsenal-row li{ margin-bottom:6px; }
+
+  .project{
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: clamp(22px, 3.4vw, 34px);
+    margin-bottom: 22px;
+    box-shadow: var(--shadow);
+  }
+  .project-head{
+    display:flex; justify-content:space-between; align-items:baseline; gap:16px; flex-wrap:wrap;
+    margin-bottom: 12px;
+  }
+  .project-head h3{ font-size:1.25rem; }
+  .project-head a.visit{
+    font-size:0.86rem; color: var(--accent); text-decoration:none;
+    border-bottom: 1px solid color-mix(in srgb, var(--accent) 40%, transparent);
+    white-space:nowrap; font-family: var(--font-sans);
+  }
+  .project-head a.visit:hover{ border-color: var(--accent); }
+  .project p.desc{ color: var(--ink-soft); margin-bottom:22px; max-width:70ch; }
+  .project-cols{
+    display:grid;
+    grid-template-columns: repeat(auto-fit,minmax(190px,1fr));
+    gap: 22px; margin-bottom: 20px;
+  }
+  .project-cols h4{ font-size:0.82rem; color: var(--gold); margin:0 0 9px; font-weight:500; }
+  .project-cols ul{ margin:0; padding-left:16px; font-size:0.9rem; color: var(--ink-soft); }
+  .project-cols li{ margin-bottom:5px; }
+  .stack-row{ display:flex; flex-wrap:wrap; gap:8px; }
+  .stack-row span{
+    font-size:0.8rem; color: var(--ink-soft); background: var(--accent-soft);
+    padding:5px 12px; border-radius:40px;
+  }
+
+  .two-col{
+    display:grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: clamp(28px, 5vw, 56px);
+  }
+  .two-col h4{ font-size:0.95rem; color: var(--accent); margin-bottom:16px; font-family: var(--font-sans); font-weight:600; }
+  .two-col ul{ margin:0; padding-left:18px; color: var(--ink-soft); font-size:0.97rem; }
+  .two-col li{ margin-bottom:10px; }
+
+  .flow-grid{
+    display:grid;
+    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+    gap: clamp(22px, 3vw, 28px);
+    margin-bottom:36px;
+  }
+  .flow-card h4{ font-size:1.02rem; margin-bottom:8px; font-family: var(--font-serif); }
+  .flow-card p{ font-size:0.9rem; color: var(--ink-soft); }
+  .flow-card .rule{ width: 28px; height:2px; background: var(--gold); margin-bottom:14px; }
+
+  .principle-grid{
+    display:grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: clamp(28px, 4vw, 40px) clamp(32px, 5vw, 56px);
+  }
+  .principle-grid h4{ font-size:1.05rem; margin-bottom:14px; }
+  .principle-grid ul{ margin:0; padding-left:18px; color: var(--ink-soft); font-size:0.95rem; }
+  .principle-grid li{ margin-bottom:9px; }
+
+  .edu-block{
+    background: var(--surface); border:1px solid var(--line); border-radius: var(--radius);
+    padding: clamp(24px, 4vw, 40px); box-shadow: var(--shadow);
+  }
+  .edu-block h3{ font-size:1.2rem; margin-bottom:4px; }
+  .edu-block .school{ color: var(--accent); font-size:0.95rem; margin-bottom:26px; display:block; font-family: var(--font-sans); }
+  .edu-cols{
+    display:grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: clamp(22px, 3vw, 30px);
+  }
+  .edu-cols h4{ font-size:0.82rem; color: var(--ink-faint); margin-bottom:10px; font-family: var(--font-sans); font-weight:500; }
+  .edu-cols ul{ margin:0; padding-left:16px; font-size:0.88rem; color: var(--ink-soft); }
+  .edu-cols li{ margin-bottom:6px; }
+
+  .cert-cols{
+    display:grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: clamp(28px, 4vw, 40px);
+    margin-top:56px;
+  }
+  .cert-cols h4{ font-size:0.95rem; color: var(--accent); margin-bottom:16px; font-family: var(--font-sans); font-weight:600; }
+  .cert-cols ul{ margin:0; padding-left:18px; color: var(--ink-soft); }
+  .cert-cols li{ margin-bottom:9px; }
+
+  .connect-ctas{ display:flex; gap:14px; flex-wrap:wrap; }
+  footer{ padding: 40px 0 48px; border-top: 1px solid var(--line); }
+  .footer-inner{
+    display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:14px;
+    font-size:0.85rem; color: var(--ink-faint);
+  }
+  .footer-links{ display:flex; gap:20px; flex-wrap:wrap; }
+  .footer-links a{ text-decoration:none; color: var(--ink-soft); }
+  .footer-links a:hover{ color: var(--accent); }
+
+  @media (max-width: 900px){
+    .hero-grid{
+      grid-template-columns: 1fr;
+      gap: 26px;
+    }
+    .hero-photo{
+      order: -1;
+      justify-self: start;
+      width: clamp(170px, 34vw, 250px);
+      max-width: none;
+    }
+    .stat-strip{
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+  }
+
+  @media (max-width: 560px){
+    body{ font-size: 15.5px; }
+    .nav-inner{ padding-block: 13px; }
+
+    .hero-ctas{
+      flex-direction: row;
+      flex-wrap: nowrap;
+      gap: 6px;
+    }
+    .hero-ctas .btn{
+      flex: 1 1 0;
+      min-width: 0;
+      justify-content: center;
+      padding: 11px 6px;
+      font-size: clamp(0.72rem, 2.7vw, 0.84rem);
+      gap: 5px;
+    }
+    .hero-ctas .btn-icon{
+      width: 0.95em;
+      height: 0.95em;
+    }
+
+    .project-head{ flex-direction:column; align-items:flex-start; gap:6px; }
+
+    .connect-ctas{ flex-direction:column; align-items:stretch; }
+    .connect-ctas .btn{ justify-content:center; }
+
+    .footer-inner{ flex-direction:column; align-items:flex-start; }
+  }
+
+  @media (max-width: 380px){
+    .nav-id span{ font-size:0.98rem; }
+    .hero-photo{ width: clamp(150px, 46vw, 200px); }
+    .hero-ctas{ gap: 5px; }
+    .hero-ctas .btn{ padding: 10px 5px; font-size: 0.72rem; gap: 4px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav-inner">
+    <a class="nav-id" href="#top">
+      <img src="https://cardlabs.cloud/static/images/me.jpeg" alt="Peter Barasa">
+      <span>Peter Barasa</span>
+    </a>
+    <button type="button" class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="sidebar" aria-label="Open menu">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </button>
+  </div>
+</header>
+
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+<aside class="sidebar" id="sidebar" aria-hidden="true">
+  <nav class="links" aria-label="Section navigation">
+    <a href="#philosophy">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5A4.61 4.61 0 0 1 8.91 14"/></svg>
+      Philosophy
+    </a>
+    <a href="#arsenal">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 8.5 12 3.5 3 8.5v7L12 20.5l9-5v-7Z"/><path d="M3 8.5 12 13.5l9-5"/><path d="M12 13.5v7"/></svg>
+      Arsenal
+    </a>
+    <a href="#projects">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 2 9 5-9 5-9-5 9-5Z"/><path d="m3 12 9 5 9-5"/><path d="m3 17 9 5 9-5"/></svg>
+      Projects
+    </a>
+    <a href="#domain">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="2.5"/><path d="M2 10h20"/></svg>
+      FinTech
+    </a>
+    <a href="#ai-workflows">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.5 13.9 8 19.5 9.9 13.9 11.8 12 17.3 10.1 11.8 4.5 9.9 10.1 8 12 2.5Z"/><path d="M18.5 15.5 19.3 17.7 21.5 18.5 19.3 19.3 18.5 21.5 17.7 19.3 15.5 18.5 17.7 17.7 18.5 15.5Z"/></svg>
+      AI Workflows
+    </a>
+    <a href="#education">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 9.5 12 4.5 2 9.5l10 5 10-5Z"/><path d="M6 11.8V16c0 1.4 2.7 2.5 6 2.5s6-1.1 6-2.5v-4.2"/></svg>
+      Education
+    </a>
+    <a href="#connect">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="4.5" width="19" height="15" rx="2.5"/><path d="m3.5 7 8.5 6 8.5-6"/></svg>
+      Connect
+    </a>
+  </nav>
+
+  <div class="sidebar-foot">
+    <a href="https://github.com/barasapeter" target="_blank" rel="noopener">GitHub</a>
+    <a href="https://bsky.app/profile/barasapeter.bsky.social" target="_blank" rel="noopener">BlueSky</a>
+    <a href="https://x.com/devilmusk" target="_blank" rel="noopener">X</a>
+  </div>
+</aside>
+
+<main id="top">
+
+  <section class="hero wrap">
+    <div class="hero-grid">
+      <div>
+        <div class="role">Cloud-Native Backend &amp; DevSecOps Engineer</div>
+        <h1>I build backend systems that hold up under real load.</h1>
+        <p class="desc">I design and build high-performance backend systems, cloud infrastructure and DevOps pipelines engineered for security, scalability, reliability and cost efficiency, mostly for financial platforms where downtime isn't an option.</p>
+        <div class="hero-ctas">
+          <a class="btn primary" href="#projects">View my work</a>
+          <a class="btn" href="https://github.com/barasapeter" target="_blank" rel="noopener">
+            <svg class="btn-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 .5C5.73.5.5 5.73.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.56v-2.17c-3.2.7-3.87-1.37-3.87-1.37-.53-1.34-1.3-1.7-1.3-1.7-1.06-.72.08-.71.08-.71 1.17.08 1.79 1.2 1.79 1.2 1.04 1.79 2.73 1.27 3.4.97.11-.75.41-1.27.74-1.56-2.55-.29-5.24-1.28-5.24-5.68 0-1.25.45-2.28 1.18-3.08-.12-.29-.51-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.79 0c2.21-1.49 3.18-1.18 3.18-1.18.62 1.59.23 2.76.11 3.05.73.8 1.18 1.83 1.18 3.08 0 4.41-2.7 5.38-5.26 5.67.42.36.79 1.07.79 2.16v3.2c0 .31.21.68.8.56C20.21 21.39 23.5 17.08 23.5 12 23.5 5.73 18.27.5 12 .5z"/></svg>
+            GitHub
+          </a>
+          <a class="btn" href="https://cardlabs.cloud/cdn-cgi/l/email-protection#9bf9fae9fae8faebfeeffee9aea9dbfcf6faf2f7b5f8f4f6">Get in touch</a>
+        </div>
+      </div>
+      <div class="hero-photo">
+        <img src="https://cardlabs.cloud/static/images/me2.jpeg" alt="Portrait of Peter Barasa">
+      </div>
+    </div>
+    <div class="stat-strip">
+      <div class="stat"><span class="num">99.99%</span><span class="label">Uptime target on production systems</span></div>
+      <div class="stat"><span class="num">&lt;500ms</span><span class="label">P95 latency on payment services</span></div>
+      <div class="stat"><span class="num">100k+</span><span class="label">Daily active users served</span></div>
+    </div>
+  </section>
+
+  <section id="philosophy" class="wrap">
+    <span class="eyebrow">Philosophy</span>
+    <h2>Engineering philosophy</h2>
+    <div class="quote-block">I engineer critical financial technology systems where 99.99% uptime is the baseline, not the objective.</div>
+    <p class="lede">My work centers on demanding architectural standards: microservices-driven system design, and secure, observable, scalable DevSecOps pipelines.</p>
+    <div class="motive-list">
+      <div class="item"><span class="mark">＋</span><p>Infrastructure that can serve and support millions of user requests with less than one second of delay.</p></div>
+      <div class="item"><span class="mark">＋</span><p>Cloud technology that scales without forcing a rebuild of the current system.</p></div>
+      <div class="item"><span class="mark">＋</span><p>Security and privacy programs built on current standards: PCI-DSS, KYC/AML, ISO 27001.</p></div>
+      <div class="item"><span class="mark">＋</span><p>Systems that monitor themselves, surfacing problems before a customer ever feels them.</p></div>
+    </div>
+    <div class="role-chips">
+      <span class="chip">System design</span>
+      <span class="chip">Cloud-native architecture</span>
+      <span class="chip">DevSecOps engineering</span>
+      <span class="chip">Backend engineering</span>
+      <span class="chip">Platform engineering</span>
+    </div>
+  </section>
+
+  <section id="arsenal" class="wrap" style="background:none;">
+    <span class="eyebrow">Arsenal</span>
+    <h2>Technical arsenal</h2>
+    <p class="lede">A working toolkit across cloud infrastructure, backend services, data, security and observability, assembled for financial-grade systems.</p>
+    <div class="arsenal-list">
+      <div class="arsenal-row">
+        <div>
+          <span class="kicker">Cloud &amp; infrastructure</span>
+          <h3>AWS-first, multi-cloud aware</h3>
+          <div class="tools">AWS · Azure · Terraform · Pulumi · Docker · Kubernetes · Helm</div>
+        </div>
+        <ul>
+          <li>Multi-AZ, fault-tolerant architecture on EC2, ECS/EKS, Lambda, RDS and DynamoDB</li>
+          <li>Modularized, drift-checked infrastructure as code across dev, staging and production</li>
+          <li>Blue-green and canary deployments with automated scaling policies</li>
+        </ul>
+      </div>
+      <div class="arsenal-row">
+        <div>
+          <span class="kicker">Backend &amp; APIs</span>
+          <h3>Java, Python, Node and Go</h3>
+          <div class="tools">Spring Boot · FastAPI · NestJS · Go · Rust (learning) · gRPC</div>
+        </div>
+        <ul>
+          <li>High-performance async APIs handling 10,000+ requests per second</li>
+          <li>Real-time systems built on WebSockets and server-sent events</li>
+          <li>Low-latency payment microservices written in Go</li>
+        </ul>
+      </div>
+      <div class="arsenal-row">
+        <div>
+          <span class="kicker">Data layer</span>
+          <h3>Relational, NoSQL and cache</h3>
+          <div class="tools">PostgreSQL · MongoDB · DynamoDB · Redis · Kafka · RabbitMQ</div>
+        </div>
+        <ul>
+          <li>Query optimization for high-transaction systems</li>
+          <li>Event sourcing and CQRS patterns with dead-letter handling</li>
+          <li>Cache invalidation strategies and real-time pub/sub</li>
+        </ul>
+      </div>
+      <div class="arsenal-row">
+        <div>
+          <span class="kicker">DevSecOps &amp; CI/CD</span>
+          <h3>Security built into the pipeline</h3>
+          <div class="tools">GitHub Actions · ArgoCD · Snyk · Trivy · SonarQube</div>
+        </div>
+        <ul>
+          <li>Multi-stage pipelines: test, security scan, then deploy</li>
+          <li>GitOps sync from Git into Kubernetes</li>
+          <li>Automated rollback on deployment failure</li>
+        </ul>
+      </div>
+      <div class="arsenal-row">
+        <div>
+          <span class="kicker">Observability &amp; SRE</span>
+          <h3>Understanding why, not just when</h3>
+          <div class="tools">Prometheus · Grafana · ELK · OpenTelemetry · Jaeger</div>
+        </div>
+        <ul>
+          <li>SLI, SLO and SLA definition and tracking</li>
+          <li>Distributed tracing across microservices</li>
+          <li>ML-assisted anomaly detection and root-cause analysis</li>
+        </ul>
+      </div>
+      <div class="arsenal-row">
+        <div>
+          <span class="kicker">Security &amp; identity</span>
+          <h3>Zero trust, defense in depth</h3>
+          <div class="tools">OAuth2/OIDC · JWT · Vault · RBAC/ABAC · WAF</div>
+        </div>
+        <ul>
+          <li>Secrets management with Vault and AWS Secrets Manager</li>
+          <li>Practices aligned with PCI-DSS, GDPR and ISO 27001</li>
+          <li>Threat modeling and secure coding against the OWASP Top 10</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects" class="wrap">
+    <span class="eyebrow">Projects</span>
+    <h2>Featured projects and implementations</h2>
+    <p class="lede">Production-style systems built to demonstrate architecture, security and observability working together.</p>
+
+    <div class="project">
+      <div class="project-head">
+        <h3>Enterprise FinTech Authentication Service</h3>
+        <a class="visit" href="https://auth-core.cardlabs.cloud" target="_blank" rel="noopener">View live ↗</a>
+      </div>
+      <p class="desc">Production-grade authentication for systems handling 100k+ daily active users.</p>
+      <div class="project-cols">
+        <div>
+          <h4>Architecture</h4>
+          <ul>
+            <li>Spring Boot service with JWT + OAuth2 flows</li>
+            <li>PostgreSQL with row-level security for multi-tenancy</li>
+            <li>Redis for token blacklisting and sessions</li>
+          </ul>
+        </div>
+        <div>
+          <h4>Security</h4>
+          <ul>
+            <li>Device fingerprinting and anomaly detection</li>
+            <li>Per-user and per-IP rate limiting</li>
+            <li>Full audit logging of authentication events</li>
+          </ul>
+        </div>
+        <div>
+          <h4>Observability</h4>
+          <ul>
+            <li>Prometheus metrics on login success and p95/p99 latency</li>
+            <li>OpenTelemetry tracing with Grafana dashboards</li>
+          </ul>
+        </div>
+      </div>
+      <div class="stack-row"><span>Spring Boot</span><span>OAuth2</span><span>PostgreSQL</span><span>Redis</span><span>AWS ECS Fargate</span></div>
+    </div>
+
+    <div class="project">
+      <div class="project-head">
+        <h3>Cloud-Native E-Commerce Platform</h3>
+        <a class="visit" href="https://shop.cardlabs.cloud" target="_blank" rel="noopener">Visit site ↗</a>
+      </div>
+      <p class="desc">Scalable microservices architecture demonstrating DevOps excellence end to end.</p>
+      <div class="project-cols">
+        <div>
+          <h4>Tech stack</h4>
+          <ul>
+            <li>FastAPI, NestJS and Spring Boot services</li>
+            <li>PostgreSQL, MongoDB and Redis for orders, catalog and cart</li>
+            <li>RabbitMQ for asynchronous order processing</li>
+          </ul>
+        </div>
+        <div>
+          <h4>Pipeline</h4>
+          <ul>
+            <li>GitHub Actions for CI/CD</li>
+            <li>Blue-green deployments with automatic rollback</li>
+            <li>Infrastructure drift detection</li>
+          </ul>
+        </div>
+        <div>
+          <h4>Observability</h4>
+          <ul>
+            <li>Prometheus, Grafana, ELK and Jaeger</li>
+            <li>99.9% uptime SLO at under 500ms p95</li>
+          </ul>
+        </div>
+      </div>
+      <div class="stack-row"><span>Terraform</span><span>AWS EKS</span><span>RDS</span><span>ElastiCache</span></div>
+    </div>
+
+    <div class="project">
+      <div class="project-head">
+        <h3>Production Observability Platform</h3>
+        <a class="visit" href="https://pop.cardlabs.cloud" target="_blank" rel="noopener">Explore site ↗</a>
+      </div>
+      <p class="desc">End-to-end monitoring built for microservices environments: metrics, logs and traces in one place.</p>
+      <div class="project-cols">
+        <div>
+          <h4>Components</h4>
+          <ul>
+            <li>Prometheus with custom exporters</li>
+            <li>Grafana with 15+ pre-built dashboards</li>
+            <li>ELK stack for centralized logging</li>
+          </ul>
+        </div>
+        <div>
+          <h4>Features</h4>
+          <ul>
+            <li>Automatic service discovery in Kubernetes</li>
+            <li>Pre-configured alerts for CPU, memory, disk and errors</li>
+            <li>Log correlation with trace IDs</li>
+          </ul>
+        </div>
+      </div>
+      <div class="stack-row"><span>Prometheus</span><span>Grafana</span><span>Elasticsearch</span><span>AlertManager</span></div>
+    </div>
+
+    <div class="project">
+      <div class="project-head">
+        <h3>DevSecOps Pipeline Template</h3>
+        <a class="visit" href="https://shop.cardlabs.cloud" target="_blank" rel="noopener">View repository ↗</a>
+      </div>
+      <p class="desc">Reusable CI/CD pipeline with a security-first approach, from build to verified rollout.</p>
+      <div class="project-cols">
+        <div>
+          <h4>Pipeline stages</h4>
+          <ul>
+            <li>Multi-stage Docker builds</li>
+            <li>Unit, integration and contract tests</li>
+            <li>SonarQube, Snyk and secrets scanning</li>
+            <li>Kubernetes rolling update, smoke-tested with rollback</li>
+          </ul>
+        </div>
+        <div>
+          <h4>Security gates</h4>
+          <ul>
+            <li>No critical or high vulnerabilities in production</li>
+            <li>Code coverage above 80% required</li>
+            <li>OWASP dependency scan must pass</li>
+          </ul>
+        </div>
+      </div>
+      <div class="stack-row"><span>GitHub Actions</span><span>SonarQube</span><span>Trivy</span><span>ArgoCD</span></div>
+    </div>
+  </section>
+
+  <section id="domain" class="wrap" style="background:none;">
+    <span class="eyebrow">Domain</span>
+    <h2>FinTech and payments</h2>
+    <p class="lede">Years of building for mobile-first, low-bandwidth markets shape how I design payment systems.</p>
+    <div class="two-col">
+      <div>
+        <h4>Understanding of</h4>
+        <ul>
+          <li>Mobile money ecosystems: M-Pesa Daraja, Airtel Money, mobile-banking architecture</li>
+          <li>Payment gateway integrations: Stripe, Flutterwave, Paystack</li>
+          <li>Transaction lifecycle management and fraud detection patterns</li>
+          <li>Regulatory compliance: KYC/AML, PCI-DSS, GDPR</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Business context</h4>
+        <ul>
+          <li>Mobile-first, low-bandwidth market dynamics</li>
+          <li>Super-app strategy: financial services, commerce and utilities in one</li>
+          <li>Agent network management for cash-in and cash-out</li>
+          <li>Cross-border remittance systems</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="ai-workflows" class="wrap">
+    <span class="eyebrow">AI workflows</span>
+    <h2>AI-enhanced workflows for fraud monitoring</h2>
+    <p class="lede">I'm interested in building AI-assisted fraud monitoring that helps financial platforms detect suspicious behavior at scale, prioritize risk, and give analysts the context to decide faster.</p>
+    <div class="flow-grid">
+      <div class="flow-card">
+        <div class="rule"></div>
+        <h4>Real-time detection</h4>
+        <p>Streaming transaction signals, behavioral baselines and anomaly detection across payment events.</p>
+      </div>
+      <div class="flow-card">
+        <div class="rule"></div>
+        <h4>Risk decisioning</h4>
+        <p>Deterministic rules, model scores and contextual signals combined into explainable decisions.</p>
+      </div>
+      <div class="flow-card">
+        <div class="rule"></div>
+        <h4>Analyst workflows</h4>
+        <p>AI-assisted alert enrichment, case summarization and prioritization that cuts investigation time.</p>
+      </div>
+      <div class="flow-card">
+        <div class="rule"></div>
+        <h4>Governance at scale</h4>
+        <p>Human review, audit trails, model monitoring and feedback loops for accountable automation.</p>
+      </div>
+    </div>
+    <div class="role-chips">
+      <span class="chip">Event streaming</span>
+      <span class="chip">Feature pipelines</span>
+      <span class="chip">Anomaly detection</span>
+      <span class="chip">Rules engines</span>
+      <span class="chip">Case management</span>
+      <span class="chip">Model observability</span>
+    </div>
+  </section>
+
+  <section class="wrap" style="background:none;">
+    <span class="eyebrow">Principles</span>
+    <h2>Engineering principles</h2>
+    <div class="principle-grid">
+      <div>
+        <h4>Architecture</h4>
+        <ul>
+          <li>Start with a minimum viable architecture, build incrementally</li>
+          <li>Design for testability, deployability and observability from day one</li>
+          <li>Decouple deployments from releases</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Security</h4>
+        <ul>
+          <li>Shift left: integrate checks into CI/CD</li>
+          <li>Zero trust: verify every request</li>
+          <li>Defense in depth across multiple layers</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Operations</h4>
+        <ul>
+          <li>Automate toil. If you do it twice, script it</li>
+          <li>Observability over monitoring: understand why things fail</li>
+          <li>Blameless post-mortems that lead to real improvement</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Collaboration</h4>
+        <ul>
+          <li>Documentation is code: ADRs, runbooks, API specs</li>
+          <li>Mentorship through pair programming and code review</li>
+          <li>Agile as a tool, not dogma</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="education" class="wrap">
+    <span class="eyebrow">Education</span>
+    <h2>Education and background</h2>
+    <div class="edu-block">
+      <h3>Bachelor of Science in Computer Science</h3>
+      <span class="school">Egerton University</span>
+      <div class="edu-cols">
+        <div>
+          <h4>Specialization</h4>
+          <ul>
+            <li>Operating systems and process scheduling</li>
+            <li>Advanced data structures and algorithms</li>
+            <li>Distributed systems and cloud computing</li>
+            <li>Database systems and network security</li>
+          </ul>
+        </div>
+        <div>
+          <h4>Applied focus</h4>
+          <ul>
+            <li>Systems programming and concurrency modeling</li>
+            <li>Relational and NoSQL database projects</li>
+            <li>Cloud-native deployment simulations</li>
+            <li>Secure development and threat modeling</li>
+          </ul>
+        </div>
+        <div>
+          <h4>Professional foundation</h4>
+          <ul>
+            <li>3+ years of production-grade development</li>
+            <li>Agile and Scrum delivery environments</li>
+            <li>Exposure to large-scale distributed systems</li>
+            <li>Cross-functional collaboration with product, security and ops</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="cert-cols">
+      <div>
+        <h4>Certifications pursuing, 2026</h4>
+        <ul>
+          <li>AWS Certified Solutions Architect (Professional)</li>
+          <li>Certified Information Systems Security Professional (CISSP)</li>
+          <li>TOGAF 9 Certified (Enterprise Architecture)</li>
+          <li>Certified Kubernetes Administrator (CKA)</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Also studying</h4>
+        <ul>
+          <li>SAFe Agile Framework for enterprise architecture roles</li>
+          <li>Rust for high-performance microservices</li>
+          <li>Advanced Kubernetes: service mesh, multi-cluster</li>
+          <li>FinTech regulation: PSD2, Open Banking standards</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="connect" class="wrap" style="background:none; padding-bottom:64px;">
+    <span class="eyebrow">Connect</span>
+    <h2>Let's build something reliable</h2>
+    <p class="lede">I'm drawn to work on mobile payment platforms and super apps, cloud-native SaaS at scale, DevSecOps transformation, high-reliability fintech systems, and AI-enhanced fraud monitoring.</p>
+    <div class="connect-ctas">
+      <a class="btn primary" href="https://cardlabs.cloud/cdn-cgi/l/email-protection#9bf9fae9fae8faebfeeffee9aea9dbfcf6faf2f7b5f8f4f6">Send an email</a>
+      <a class="btn" href="https://github.com/barasapeter" target="_blank" rel="noopener">
+        <svg class="btn-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 .5C5.73.5.5 5.73.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.56v-2.17c-3.2.7-3.87-1.37-3.87-1.37-.53-1.34-1.3-1.7-1.3-1.7-1.06-.72.08-.71.08-.71 1.17.08 1.79 1.2 1.79 1.2 1.04 1.79 2.73 1.27 3.4.97.11-.75.41-1.27.74-1.56-2.55-.29-5.24-1.28-5.24-5.68 0-1.25.45-2.28 1.18-3.08-.12-.29-.51-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.79 0c2.21-1.49 3.18-1.18 3.18-1.18.62 1.59.23 2.76.11 3.05.73.8 1.18 1.83 1.18 3.08 0 4.41-2.7 5.38-5.26 5.67.42.36.79 1.07.79 2.16v3.2c0 .31.21.68.8.56C20.21 21.39 23.5 17.08 23.5 12 23.5 5.73 18.27.5 12 .5z"/></svg>
+        GitHub
+      </a>
+      <a class="btn" href="https://bsky.app/profile/barasapeter.bsky.social" target="_blank" rel="noopener">BlueSky</a>
+      <a class="btn" href="https://x.com/devilmusk" target="_blank" rel="noopener">X</a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="wrap">
+  <div class="footer-inner">
+    <span>Nairobi, Kenya · Remote / Hybrid</span>
+    <div class="footer-links">
+      <a href="https://github.com/barasapeter" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://bsky.app/profile/barasapeter.bsky.social" target="_blank" rel="noopener">BlueSky</a>
+      <a href="https://x.com/devilmusk" target="_blank" rel="noopener">X</a>
+      <a href="https://cardlabs.cloud/cdn-cgi/l/email-protection#9bf9fae9fae8faebfeeffee9aea9dbfcf6faf2f7b5f8f4f6">Email</a>
+    </div>
+    <span>© 2026 Peter Barasa</span>
+  </div>
+</footer>
+
+<script>
+  (function(){
+    var header = document.querySelector('header.nav');
+    if(!header) return;
+    function sync(){
+      document.documentElement.style.setProperty('--header-h', header.offsetHeight + 'px');
+    }
+    sync();
+    window.addEventListener('load', sync);
+    window.addEventListener('orientationchange', sync);
+    if('ResizeObserver' in window){
+      new ResizeObserver(sync).observe(header);
+    } else {
+      window.addEventListener('resize', sync);
+    }
+  })();
+
+  (function(){
+    var menuBtn = document.getElementById('menuBtn');
+    var sidebar = document.getElementById('sidebar');
+    var overlay = document.getElementById('sidebarOverlay');
+    var body = document.body;
+
+    function openMenu(){
+      sidebar.classList.add('open');
+      overlay.classList.add('open');
+      sidebar.setAttribute('aria-hidden','false');
+      menuBtn.setAttribute('aria-expanded','true');
+      menuBtn.setAttribute('aria-label','Close menu');
+      body.classList.add('sidebar-locked');
+    }
+    function closeMenu(){
+      sidebar.classList.remove('open');
+      overlay.classList.remove('open');
+      sidebar.setAttribute('aria-hidden','true');
+      menuBtn.setAttribute('aria-expanded','false');
+      menuBtn.setAttribute('aria-label','Open menu');
+      body.classList.remove('sidebar-locked');
+    }
+
+    menuBtn.addEventListener('click', function(){
+      sidebar.classList.contains('open') ? closeMenu() : openMenu();
+    });
+    overlay.addEventListener('click', closeMenu);
+    document.addEventListener('keydown', function(e){
+      if(e.key === 'Escape') closeMenu();
+    });
+    sidebar.querySelectorAll('a').forEach(function(link){
+      link.addEventListener('click', closeMenu);
+    });
+  })();
+
+  (function(){
+    var links = Array.prototype.slice.call(document.querySelectorAll('nav.links a[href^="#"]'));
+    if(!links.length || !('IntersectionObserver' in window)) return;
+
+    var map = {}, targets = [];
+    links.forEach(function(link){
+      var id = link.getAttribute('href').slice(1);
+      var el = document.getElementById(id);
+      if(el){ map[id] = link; targets.push(el); }
+    });
+    if(!targets.length) return;
+
+    var active = {};
+    var observer = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting) active[entry.target.id] = true;
+        else delete active[entry.target.id];
+      });
+      var current = targets.filter(function(t){ return active[t.id]; })[0];
+      links.forEach(function(l){ l.classList.remove('active'); });
+      if(current && map[current.id]) map[current.id].classList.add('active');
+    }, { rootMargin: '-20% 0px -70% 0px' });
+
+    targets.forEach(function(t){ observer.observe(t); });
+  })();
+</script>
+</body>
+</html>
