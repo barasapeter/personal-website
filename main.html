@@ -101,7 +101,6 @@
       display: block;
     }
 
-    /* Hide text that would otherwise reflow when the webfont swaps in. */
     html.fonts-loading .hero,
     html.fonts-loading .nav-name {
       visibility: hidden;
@@ -180,7 +179,6 @@
       color: var(--accent);
     }
 
-    /* Avatar: fixed box, never grows/shrinks with the image load state */
     .nav-id .avatar {
       width: 32px;
       height: 32px;
@@ -783,7 +781,7 @@
 
     .principle-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: clamp(28px, 4vw, 40px) clamp(32px, 5vw, 56px);
     }
 
@@ -801,6 +799,24 @@
 
     .principle-grid li {
       margin-bottom: 9px;
+    }
+
+    .principle-photo {
+      justify-self: center;
+      align-self: start;
+      width: 100%;
+      max-width: 220px;
+      aspect-ratio: 4 / 5;
+      border-radius: var(--radius);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+    }
+
+    .principle-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 22%;
     }
 
     .edu-block {
@@ -910,12 +926,6 @@
       color: var(--accent);
     }
 
-    /* ============================================================
-       Image skeleton loaders
-       Every <img> lives inside a .media box that already occupies
-       its final space. The box shimmers until the image is decoded,
-       then the image fades in. Zero layout shift either way.
-       ============================================================ */
     .media {
       position: relative;
       overflow: hidden;
@@ -983,6 +993,10 @@
         grid-template-columns: 1fr;
         gap: 20px;
       }
+
+      .principle-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
     }
 
     @media (max-width: 560px) {
@@ -1032,6 +1046,14 @@
       .footer-inner {
         flex-direction: column;
         align-items: flex-start;
+      }
+
+      .principle-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .principle-photo {
+        max-width: 200px;
       }
     }
 
@@ -1526,6 +1548,10 @@
             <li>Agile as a tool, not dogma</li>
           </ul>
         </div>
+        <div class="principle-photo media">
+          <img src="https://cardlabs.cloud/static/images/me2.jpeg" alt="Peter Barasa" width="220" height="275"
+            loading="lazy" decoding="async">
+        </div>
       </div>
     </section>
 
@@ -1625,11 +1651,6 @@
   </footer>
 
   <script>
-    /* ---------------------------------------------------------------
-       1. Skeleton loaders for every image inside a .media wrapper.
-          Space is reserved by CSS before the image arrives, so nothing
-          moves when it decodes.
-       --------------------------------------------------------------- */
     (function () {
       function settle(img, failed) {
         var box = img.parentElement;
@@ -1651,10 +1672,6 @@
       });
     })();
 
-    /* ---------------------------------------------------------------
-       2. Font swap: reveal the hero and the header name only once the
-          webfont is actually ready, so no glyph re-flow is ever seen.
-       --------------------------------------------------------------- */
     if (document.fonts && document.fonts.ready) {
       document.fonts.ready.then(function () {
         document.documentElement.classList.remove('fonts-loading');
@@ -1663,9 +1680,6 @@
       document.documentElement.classList.remove('fonts-loading');
     }
 
-    /* ---------------------------------------------------------------
-       3. Keep --header-h in sync (unchanged)
-       --------------------------------------------------------------- */
     (function () {
       var header = document.querySelector('header.nav');
       if (!header) return;
@@ -1685,9 +1699,6 @@
       }
     })();
 
-    /* ---------------------------------------------------------------
-       4. Sidebar menu (unchanged)
-       --------------------------------------------------------------- */
     (function () {
       var menuBtn = document.getElementById('menuBtn');
       var sidebar = document.getElementById('sidebar');
@@ -1727,9 +1738,6 @@
       });
     })();
 
-    /* ---------------------------------------------------------------
-       5. Scroll-spy for the sidebar links (unchanged)
-       --------------------------------------------------------------- */
     (function () {
       var links = Array.prototype.slice.call(document.querySelectorAll('nav.links a[href^="#"]'));
       if (!links.length || !('IntersectionObserver' in window)) return;
