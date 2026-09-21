@@ -4,11 +4,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>Peter Barasa | Cloud-Native Backend & DevSecOps Engineer</title>
+  <title>Peter Barasa | Cloud-Native Backend &amp; DevSecOps Engineer</title>
   <link rel="icon"
     href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>◆</text></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="image" href="https://cardlabs.cloud/static/images/me.jpeg" fetchpriority="high">
+  <link rel="preload" as="image" href="https://cardlabs.cloud/static/images/me2.jpeg" fetchpriority="high">
+  <script>
+    document.documentElement.classList.add('fonts-loading');
+  </script>
   <link
     href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=Inter:wght@400;500;600&display=swap"
     rel="stylesheet">
@@ -30,6 +35,8 @@
       --font-serif: 'Source Serif 4', Georgia, 'Times New Roman', serif;
       --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
       --header-h: 74px;
+      --skel-base: var(--bg-soft);
+      --skel-hi: var(--line);
       color-scheme: light;
     }
 
@@ -92,6 +99,12 @@
     img {
       max-width: 100%;
       display: block;
+    }
+
+    /* Hide text that would otherwise reflow when the webfont swaps in. */
+    html.fonts-loading .hero,
+    html.fonts-loading .nav-name {
+      visibility: hidden;
     }
 
     a {
@@ -160,7 +173,6 @@
       align-items: center;
       gap: 11px;
       text-decoration: none;
-      color: var(--ink);
       font-family: var(--font-serif);
       font-weight: 600;
       font-size: 1.05rem;
@@ -168,19 +180,28 @@
       color: var(--accent);
     }
 
-    .nav-id img {
+    /* Avatar: fixed box, never grows/shrinks with the image load state */
+    .nav-id .avatar {
       width: 32px;
       height: 32px;
       border-radius: 50%;
-      object-fit: cover;
       border: 1px solid var(--line);
       flex-shrink: 0;
+      overflow: hidden;
     }
 
-    .nav-id span {
+    .nav-id .avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .nav-id .nav-name {
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
+      min-width: 0;
     }
 
     .menu-btn {
@@ -188,7 +209,6 @@
       --line-h: 1.5px;
       --line-gap: 5px;
       --shift: calc(var(--line-h) + var(--line-gap));
-
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -890,6 +910,62 @@
       color: var(--accent);
     }
 
+    /* ============================================================
+       Image skeleton loaders
+       Every <img> lives inside a .media box that already occupies
+       its final space. The box shimmers until the image is decoded,
+       then the image fades in. Zero layout shift either way.
+       ============================================================ */
+    .media {
+      position: relative;
+      overflow: hidden;
+      background-color: var(--skel-base);
+      background-image: linear-gradient(90deg,
+          var(--skel-base) 25%,
+          var(--skel-hi) 37%,
+          var(--skel-base) 63%);
+      background-size: 400% 100%;
+      background-repeat: no-repeat;
+      background-position: 100% 50%;
+      animation: skeleton-sweep 1.4s ease-in-out infinite;
+    }
+
+    @keyframes skeleton-sweep {
+      0% {
+        background-position: 100% 50%;
+      }
+
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+
+    .media>img {
+      opacity: 0;
+      transition: opacity .35s ease;
+    }
+
+    .media.is-loaded,
+    .media.is-error {
+      animation: none;
+      background-image: none;
+    }
+
+    .media.is-loaded>img,
+    .media.is-error>img {
+      opacity: 1;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .media {
+        animation: none;
+      }
+
+      .media>img {
+        transition: none;
+      }
+    }
+
     @media (max-width: 900px) {
       .hero-grid {
         grid-template-columns: 1fr;
@@ -960,7 +1036,7 @@
     }
 
     @media (max-width: 380px) {
-      .nav-id span {
+      .nav-id .nav-name {
         font-size: 0.98rem;
       }
 
@@ -982,12 +1058,14 @@
 </head>
 
 <body>
-
   <header class="nav">
     <div class="nav-inner">
       <a class="nav-id" href="#top">
-        <img src="https://cardlabs.cloud/static/images/me.jpeg" alt="Peter Barasa">
-        <span>Peter Barasa</span>
+        <span class="avatar media">
+          <img src="https://cardlabs.cloud/static/images/me.jpeg" alt="Peter Barasa" width="32" height="32"
+            decoding="async">
+        </span>
+        <span class="nav-name">Peter Barasa</span>
       </a>
       <button type="button" class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="sidebar"
         aria-label="Open menu">
@@ -999,6 +1077,7 @@
   </header>
 
   <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
   <aside class="sidebar" id="sidebar" aria-hidden="true">
     <nav class="links" aria-label="Section navigation">
       <a href="#philosophy">
@@ -1062,7 +1141,6 @@
         Connect
       </a>
     </nav>
-
     <div class="sidebar-foot">
       <a href="https://github.com/barasapeter" target="_blank" rel="noopener">GitHub</a>
       <a href="https://bsky.app/profile/barasapeter.bsky.social" target="_blank" rel="noopener">BlueSky</a>
@@ -1071,12 +1149,11 @@
   </aside>
 
   <main id="top">
-
     <section class="hero wrap">
       <div class="hero-grid">
         <div>
           <div class="role">Cloud-Native Backend &amp; DevSecOps Engineer</div>
-          <h1>I build backend systems that hold up under real load.</h1>
+          <h1>I work on cloud-native backend systems that hold up under real load.</h1>
           <p class="desc">I design and build high-performance backend systems, cloud infrastructure and DevOps pipelines
             engineered for security, scalability, reliability and cost efficiency, mostly for financial platforms where
             downtime isn't an option.</p>
@@ -1094,8 +1171,9 @@
               in touch</a>
           </div>
         </div>
-        <div class="hero-photo">
-          <img src="https://cardlabs.cloud/static/images/me2.jpeg" alt="Portrait of Peter Barasa">
+        <div class="hero-photo media">
+          <img src="https://cardlabs.cloud/static/images/me2.jpeg" alt="Portrait of Peter Barasa" width="680"
+            height="850" fetchpriority="high" decoding="async">
         </div>
       </div>
       <div class="stat-strip">
@@ -1223,7 +1301,6 @@
       <h2>Featured projects and implementations</h2>
       <p class="lede">Production-style systems built to demonstrate architecture, security and observability working
         together.</p>
-
       <div class="project">
         <div class="project-head">
           <h3>Enterprise FinTech Authentication Service</h3>
@@ -1258,7 +1335,6 @@
         <div class="stack-row"><span>Spring
             Boot</span><span>OAuth2</span><span>PostgreSQL</span><span>Redis</span><span>AWS ECS Fargate</span></div>
       </div>
-
       <div class="project">
         <div class="project-head">
           <h3>Cloud-Native E-Commerce Platform</h3>
@@ -1292,7 +1368,6 @@
         </div>
         <div class="stack-row"><span>Terraform</span><span>AWS EKS</span><span>RDS</span><span>ElastiCache</span></div>
       </div>
-
       <div class="project">
         <div class="project-head">
           <h3>Production Observability Platform</h3>
@@ -1322,7 +1397,6 @@
           <span>Prometheus</span><span>Grafana</span><span>Elasticsearch</span><span>AlertManager</span>
         </div>
       </div>
-
       <div class="project">
         <div class="project-head">
           <h3>DevSecOps Pipeline Template</h3>
@@ -1491,7 +1565,6 @@
           </div>
         </div>
       </div>
-
       <div class="cert-cols">
         <div>
           <h4>Certifications pursuing, 2026</h4>
@@ -1535,7 +1608,6 @@
         <a class="btn" href="https://x.com/devilmusk" target="_blank" rel="noopener">X</a>
       </div>
     </section>
-
   </main>
 
   <footer class="wrap">
@@ -1553,15 +1625,59 @@
   </footer>
 
   <script>
+    /* ---------------------------------------------------------------
+       1. Skeleton loaders for every image inside a .media wrapper.
+          Space is reserved by CSS before the image arrives, so nothing
+          moves when it decodes.
+       --------------------------------------------------------------- */
+    (function () {
+      function settle(img, failed) {
+        var box = img.parentElement;
+        if (box && box.classList.contains('media')) {
+          box.classList.add(failed ? 'is-error' : 'is-loaded');
+        }
+      }
+
+      var imgs = document.querySelectorAll('.media > img');
+
+      Array.prototype.forEach.call(imgs, function (img) {
+        if (img.complete) {
+          settle(img, img.naturalWidth === 0);
+          return;
+        }
+
+        img.addEventListener('load', function () { settle(img, false); }, { once: true });
+        img.addEventListener('error', function () { settle(img, true); }, { once: true });
+      });
+    })();
+
+    /* ---------------------------------------------------------------
+       2. Font swap: reveal the hero and the header name only once the
+          webfont is actually ready, so no glyph re-flow is ever seen.
+       --------------------------------------------------------------- */
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(function () {
+        document.documentElement.classList.remove('fonts-loading');
+      });
+    } else {
+      document.documentElement.classList.remove('fonts-loading');
+    }
+
+    /* ---------------------------------------------------------------
+       3. Keep --header-h in sync (unchanged)
+       --------------------------------------------------------------- */
     (function () {
       var header = document.querySelector('header.nav');
       if (!header) return;
+
       function sync() {
         document.documentElement.style.setProperty('--header-h', header.offsetHeight + 'px');
       }
+
       sync();
       window.addEventListener('load', sync);
       window.addEventListener('orientationchange', sync);
+
       if ('ResizeObserver' in window) {
         new ResizeObserver(sync).observe(header);
       } else {
@@ -1569,6 +1685,9 @@
       }
     })();
 
+    /* ---------------------------------------------------------------
+       4. Sidebar menu (unchanged)
+       --------------------------------------------------------------- */
     (function () {
       var menuBtn = document.getElementById('menuBtn');
       var sidebar = document.getElementById('sidebar');
@@ -1583,6 +1702,7 @@
         menuBtn.setAttribute('aria-label', 'Close menu');
         body.classList.add('sidebar-locked');
       }
+
       function closeMenu() {
         sidebar.classList.remove('open');
         overlay.classList.remove('open');
@@ -1595,25 +1715,33 @@
       menuBtn.addEventListener('click', function () {
         sidebar.classList.contains('open') ? closeMenu() : openMenu();
       });
+
       overlay.addEventListener('click', closeMenu);
+
       document.addEventListener('keydown', function (e) {
         if (e.key === 'Escape') closeMenu();
       });
+
       sidebar.querySelectorAll('a').forEach(function (link) {
         link.addEventListener('click', closeMenu);
       });
     })();
 
+    /* ---------------------------------------------------------------
+       5. Scroll-spy for the sidebar links (unchanged)
+       --------------------------------------------------------------- */
     (function () {
       var links = Array.prototype.slice.call(document.querySelectorAll('nav.links a[href^="#"]'));
       if (!links.length || !('IntersectionObserver' in window)) return;
 
       var map = {}, targets = [];
+
       links.forEach(function (link) {
         var id = link.getAttribute('href').slice(1);
         var el = document.getElementById(id);
         if (el) { map[id] = link; targets.push(el); }
       });
+
       if (!targets.length) return;
 
       var active = {};
@@ -1622,7 +1750,9 @@
           if (entry.isIntersecting) active[entry.target.id] = true;
           else delete active[entry.target.id];
         });
+
         var current = targets.filter(function (t) { return active[t.id]; })[0];
+
         links.forEach(function (l) { l.classList.remove('active'); });
         if (current && map[current.id]) map[current.id].classList.add('active');
       }, { rootMargin: '-20% 0px -70% 0px' });
