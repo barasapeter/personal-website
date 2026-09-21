@@ -436,43 +436,56 @@
       font-size: 1.06rem;
     }
 
+    /* ---------------------------------------------------------------
+       HERO
+       --------------------------------------------------------------- */
+
     .hero {
-      padding-block: clamp(36px, 6vw, 80px) clamp(44px, 7vw, 88px);
+      padding-block: clamp(32px, 5vw, 72px) clamp(40px, 6vw, 80px);
     }
 
     .hero-grid {
       display: grid;
       grid-template-columns: minmax(0, 1.12fr) minmax(0, 0.72fr);
       gap: clamp(28px, 5vw, 60px);
-      align-items: center;
+      align-items: start;
     }
 
     .hero .role {
       font-size: clamp(0.82rem, 1.4vw, 0.95rem);
       color: var(--gold);
       font-weight: 500;
-      margin-bottom: 16px;
+      margin-bottom: 12px;
     }
 
     .hero h1 {
       font-size: clamp(1.9rem, 5.4vw, 3.1rem);
       line-height: 1.13;
       letter-spacing: -0.02em;
-      margin-bottom: 18px;
+      margin-bottom: 16px;
       text-wrap: balance;
     }
 
-    .hero p.desc {
+    .hero p.desc:first-of-type {
       color: var(--ink-soft);
       font-size: clamp(1rem, 1.5vw, 1.08rem);
       max-width: 52ch;
-      margin-bottom: 30px;
+      margin-bottom: 24px;
+      line-height: 1.7;
+    }
+
+    .hero p.desc:last-of-type {
+      color: var(--ink-faint);
+      font-size: 0.92rem;
+      max-width: 54ch;
+      margin-top: 20px;
+      line-height: 1.65;
     }
 
     .hero-ctas {
       display: flex;
       gap: 12px;
-      flex-wrap: wrap;
+      flex-wrap: nowrap;
     }
 
     .btn {
@@ -535,7 +548,9 @@
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: clamp(24px, 4vw, 48px);
-      margin-top: clamp(36px, 6vw, 60px);
+      margin-top: clamp(44px, 6vw, 68px);
+      padding-top: clamp(26px, 3.5vw, 36px);
+      border-top: 1px solid var(--line);
     }
 
     .stat-strip .stat {
@@ -976,6 +991,10 @@
       }
     }
 
+    /* ---------------------------------------------------------------
+       RESPONSIVE
+       --------------------------------------------------------------- */
+
     @media (max-width: 900px) {
       .hero-grid {
         grid-template-columns: 1fr;
@@ -1174,11 +1193,16 @@
     <section class="hero wrap">
       <div class="hero-grid">
         <div>
-          <div class="role">Cloud-Native Backend &amp; DevSecOps Engineer</div>
-          <h1>I work on cloud-native backend systems that hold up under real load.</h1>
-          <p class="desc">I design and build high-performance backend systems, cloud infrastructure and DevOps pipelines
-            engineered for security, scalability, reliability and cost efficiency, mostly for financial platforms where
-            downtime isn't an option.</p>
+          <div class="role">Cloud-Native Ops &amp; Reliability Software Engineer</div>
+          <h1>I work on cloud-native backend systems that hold up under intense capacity.</h1>
+          <p class="desc">I have worked on critical systems where up-to-date security standards such as PCI-DSS,
+            KYC/AML, OWASP and ISO 27001 are non-negotiable.
+            However, none of these come in hard as software reliability. When capacity increases, incoming user traffic
+            becomes the topmost bottleneck.
+
+            I build my work around defensive programming, memory safe concurrency, autoscaling, monitoring, and log
+            analysis.
+          </p>
           <div class="hero-ctas">
             <a class="btn primary" href="#projects">View my work</a>
             <a class="btn" href="https://github.com/barasapeter" target="_blank" rel="noopener">
@@ -1192,6 +1216,13 @@
               href="https://cardlabs.cloud/cdn-cgi/l/email-protection#9bf9fae9fae8faebfeeffee9aea9dbfcf6faf2f7b5f8f4f6">Get
               in touch</a>
           </div>
+          <p class="desc">My number one priority is developing and maintaining
+            systems that have capabilities to monitor themselves so that potential problems will be discovered before a
+            customer experiences them.
+
+            I engineer systems where 99.999% uptime is the baseline, not the objective. My work focuses on strict and
+            demanding architectural standards; microservices-driven system design and the implementation of secure,
+            observable and scalable Ops pipelines.</p>
         </div>
         <div class="hero-photo media">
           <img src="https://cardlabs.cloud/static/images/me2.jpeg" alt="Portrait of Peter Barasa" width="680"
@@ -1199,7 +1230,7 @@
         </div>
       </div>
       <div class="stat-strip">
-        <div class="stat"><span class="num">99.99%</span><span class="label">Uptime target on production systems</span>
+        <div class="stat"><span class="num">99.999%</span><span class="label">Uptime target on production systems</span>
         </div>
         <div class="stat"><span class="num">&lt; 500ms</span><span class="label">P95 latency on payment services</span>
         </div>
