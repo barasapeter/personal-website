@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Experience | Peter Barasa</title>
+  <link rel="icon" href="static/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="static/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="static/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="static/apple-touch-icon.png">
+  <link rel="manifest" href="static/site.webmanifest">
+  <meta name="theme-color" content="#ffffff">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=Inter:wght@400;500;600&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="static/site.css">
+  <script src="static/site.js" defer></script>
+</head>
+
+<body>
+  <header class="nav">
+    <div class="nav-inner">
+      <a class="nav-id" href="index.html">
+        <span class="avatar media">
+          <img src="static/me.jpeg" alt="Peter Barasa" width="32" height="32" decoding="async">
+        </span>
+      </a>
+      <button type="button" class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="sidebar"
+        aria-label="Open menu">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </button>
+    </div>
+  </header>
+
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <aside class="sidebar" id="sidebar" aria-hidden="true">
+    <nav class="links" aria-label="Site navigation">
+      <a href="index.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"
+          stroke-linejoin="round" aria-hidden="true">
+          <path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V10Z" />
+          <path d="M9 21v-7h6v7" />
+        </svg>
+        Home
+      </a>
+      <a href="experience.html#philosophy">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"
+          stroke-linejoin="round" aria-hidden="true">
+          <path d="M9 18h6" />
+          <path d="M10 22h4" />
+          <path
+            d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5A4.61 4.61 0 0 1 8.91 14" />
+        </svg>
+        Philosophy
+      </a>
+      <a href="experience.html#arsenal">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"
+          stroke-linejoin="round" aria-hidden="true">
+          <path d="M21 8.5 12 3.5 3 8.5v7L12 20.5l9-5v-7Z" />
+          <path d="M3 8.5 12 13.5l9-5" />
+          <path d="M12 13.5v7" />
+        </svg>
+        Arsenal
+      </a>
+      <a href="projects.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"
+          stroke-linejoin="round" aria-hidden="true">
+          <path d="m12 2 9 5-9 5-9-5 9-5Z" />
+          <path d="m3 12 9 5 9-5" />
+          <path d="m3 17 9 5 9-5" />
+        </svg>
+        Projects
+      </a>
+      <a href="focus.html#domain">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"
+          stroke-linejoin="round" aria-hidden="true">
+          <rect x="2" y="5" width="20" height="14" rx="2.5" />
+          <path d="M2 10h20" />
+        </svg>
+        FinTech
+      </a>
+      <a href="focus.html#ai-workflows">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"
+          stroke-linejoin="round" aria-hidden="true">
+          <path d="M12 2.5 13.9 8 19.5 9.9 13.9 11.8 12 17.3 10.1 11.8 4.5 9.9 10.1 8 12 2.5Z" />
+          <path d="M18.5 15.5 19.3 17.7 21.5 18.5 19.3 19.3 18.5 21.5 17.7 19.3 15.5 18.5 17.7 17.7 18.5 15.5Z" />
+        </svg>
+        AI Workflows
+      </a>
+      <a href="focus.html#research">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"
+          stroke-linejoin="round" aria-hidden="true">
+          <path d="M3 17 9 11l4 4 8-8" />
+          <path d="M15 7h6v6" />
+        </svg>
+        Research
+      </a>
+      <a href="community.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M16 20v-1.5A3.5 3.5 0 0 0 12.5 15h-5A3.5 3.5 0 0 0 4 18.5V20" />
+          <circle cx="10" cy="7" r="3" />
+          <path d="M17 9a3 3 0 1 0 0-6M20 20v-1.5a3.5 3.5 0 0 0-2.5-3.35" />
+        </svg>
+        Community
+      </a>
+      <a href="articles.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M5 3h11l3 3v15H5z" />
+          <path d="M8 10h8M8 14h8M8 18h5" />
+        </svg>
+        Articles
+      </a>
+
+      <a href="education.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"
+          stroke-linejoin="round" aria-hidden="true">
+          <path d="M22 9.5 12 4.5 2 9.5l10 5 10-5Z" />
+          <path d="M6 11.8V16c0 1.4 2.7 2.5 6 2.5s6-1.1 6-2.5v-4.2" />
+        </svg>
+        Education
+      </a>
+      <a href="contact.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"
+          stroke-linejoin="round" aria-hidden="true">
+          <rect x="2.5" y="4.5" width="19" height="15" rx="2.5" />
+          <path d="m3.5 7 8.5 6 8.5-6" />
+        </svg>
+        Connect
+      </a>
+    </nav>
+    <div class="sidebar-foot">
+      <a href="https://github.com/barasapeter" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://bsky.app/profile/barasapeter.bsky.social" target="_blank" rel="noopener">BlueSky</a>
+      <a href="https://x.com/devilmusk" target="_blank" rel="noopener">X</a>
+    </div>
+  </aside>
+  <div class="page-trail wrap" aria-label="You are here">
+    <a href="index.html" aria-label="Home">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V10Z" /><path d="M9 21v-7h6v7" /></svg>
+    </a>
+    <svg class="trail-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m9 18 6-6-6-6" /></svg>
+    <span aria-current="page">Experience</span>
+  </div>
+  <main id="top">
+    <section id="philosophy" class="wrap">
+      <span class="eyebrow">Experience</span>
+      <h2>Engineering Experience</h2>
+      <div class="quote-block">My experience scales across enterprise businesses, education, customer-facing utility
+        software, payment integrations (M-Pesa, Airtel Money and card payment gateways). My first production-grade
+        system, <a href="https://app.cardlabs.cloud/">CardLabs</a>, which serves over 20k+ students across Egerton,
+        Maseno and University of Nairobi, taught me an
+        important lesson and now my work is implemented around secure API gateways and sturdy design patterns such as
+        encryption, idempotency, race conditions, state management, redundancy, recovery sequence and GDPR compliance.
+      </div>
+      <p class="lede">My work centers on strict and demanding architectural standards, microservices-driven system
+        design and
+        secure, observable, scalable Ops pipelines.</p>
+      <div class="motive-list">
+        <div class="item"><span class="mark">+</span>
+          <p>Infrastructure that can serve and support thousands of concurrent user requests with less than one second
+            of delay.</p>
+        </div>
+        <div class="item"><span class="mark">+</span>
+          <p>Cloud technology that scales without forcing a rebuild of the current system.</p>
+        </div>
+        <div class="item"><span class="mark">+</span>
+          <p>Security and privacy programs built on upto-date standards adhering to PCI-DSS, KYC/AML, ISO 27001.</p>
+        </div>
+        <div class="item"><span class="mark">+</span>
+          <p>Systems that monitor themselves such that arising problems are detected before a customer ever feels them.
+          </p>
+        </div>
+      </div>
+
+      <div class="philosophy-topics">
+        <h3>For detailed technical expertise dive-in, I strongly recommend you <a
+            href="https://detail-dev.cardlabs.cloud">visit my dev page.</a></h3>
+        <h3 class="topics-title">Check out more about my engineering philosophy around:</h3>
+        <div class="role-chips">
+          <a class="chip" href="https://detail-dev.cardlabs.cloud">
+            System design
+            <svg class="chip-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+              stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="m9 18 6-6-6-6" />
+            </svg>
+          </a>
+          <a class="chip" href="https://detail-dev.cardlabs.cloud">
+            Cloud-native architecture
+            <svg class="chip-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+              stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="m9 18 6-6-6-6" />
+            </svg>
+          </a>
+          <a class="chip" href="https://detail-dev.cardlabs.cloud">
+            DevSecOps engineering
+            <svg class="chip-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+              stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="m9 18 6-6-6-6" />
+            </svg>
+          </a>
+          <a class="chip" href="https://detail-dev.cardlabs.cloud">
+            Backend engineering
+            <svg class="chip-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+              stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="m9 18 6-6-6-6" />
+            </svg>
+          </a>
+          <a class="chip" href="https://detail-dev.cardlabs.cloud">
+            Platform engineering
+            <svg class="chip-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+              stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="m9 18 6-6-6-6" />
+            </svg>
+          </a>
+        </div>
+        <div class="topics-cta">
+          <a class="btn primary" href="https://detail-dev.cardlabs.cloud">
+            Visit my dedicated Developer Page
+            <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+              stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M5 12h14" />
+              <path d="m13 6 6 6-6 6" />
+            </svg>
+          </a>
+          <a class="btn" href="contact.html">Reach me out</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="arsenal" class="wrap">
+      <span class="eyebrow">Toolkit &amp; principles</span>
+      <h2>Technical arsenal</h2>
+      <p class="lede">A working toolkit across cloud infrastructure, backend services, data, security and observability,
+        assembled for financial-grade systems.</p>
+      <div class="arsenal-list">
+        <div class="arsenal-row">
+          <div>
+            <span class="kicker">Cloud &amp; infrastructure</span>
+            <h3>AWS-first, multi-cloud aware</h3>
+            <div class="tools">AWS · Azure · Terraform · Pulumi · Docker · Kubernetes · Helm</div>
+          </div>
+          <ul>
+            <li>Multi-AZ, fault-tolerant architecture on EC2, ECS/EKS, Lambda, RDS and DynamoDB</li>
+            <li>Modularized, drift-checked infrastructure as code across dev, staging and production</li>
+            <li>Blue-green and canary deployments with automated scaling policies</li>
+          </ul>
+        </div>
+        <div class="arsenal-row">
+          <div>
+            <span class="kicker">Backend &amp; APIs</span>
+            <h3>Java, Python, Node and Go</h3>
+            <div class="tools">Spring Boot · FastAPI · NestJS · Go · Rust (learning) · gRPC</div>
+          </div>
+          <ul>
+            <li>High-performance async APIs handling 10,000+ requests per second</li>
+            <li>Real-time systems built on WebSockets and server-sent events</li>
+            <li>Low-latency payment microservices written in Go</li>
+          </ul>
+        </div>
+        <div class="arsenal-row">
+          <div>
+            <span class="kicker">Data layer</span>
+            <h3>Relational, NoSQL and cache</h3>
+            <div class="tools">PostgreSQL · MongoDB · DynamoDB · Redis · Kafka · RabbitMQ</div>
+          </div>
+          <ul>
+            <li>Query optimization for high-transaction systems</li>
+            <li>Event sourcing and CQRS patterns with dead-letter handling</li>
+            <li>Cache invalidation strategies and real-time pub/sub</li>
+          </ul>
+        </div>
+        <div class="arsenal-row">
+          <div>
+            <span class="kicker">DevSecOps &amp; CI/CD</span>
+            <h3>Security built into the pipeline</h3>
+            <div class="tools">GitHub Actions · ArgoCD · Snyk · Trivy · SonarQube</div>
+          </div>
+          <ul>
+            <li>Multi-stage pipelines: test, security scan, then deploy</li>
+            <li>GitOps sync from Git into Kubernetes</li>
+            <li>Automated rollback on deployment failure</li>
+          </ul>
+        </div>
+        <div class="arsenal-row">
+          <div>
+            <span class="kicker">Observability &amp; SRE</span>
+            <h3>Understanding why, not just when</h3>
+            <div class="tools">Prometheus · Grafana · ELK · OpenTelemetry · Jaeger</div>
+          </div>
+          <ul>
+            <li>SLI, SLO and SLA definition and tracking</li>
+            <li>Distributed tracing across microservices</li>
+            <li>ML-assisted anomaly detection and root-cause analysis</li>
+          </ul>
+        </div>
+        <div class="arsenal-row">
+          <div>
+            <span class="kicker">Security &amp; identity</span>
+            <h3>Zero trust, defense in depth</h3>
+            <div class="tools">OAuth2/OIDC · JWT · Vault · RBAC/ABAC · WAF</div>
+          </div>
+          <ul>
+            <li>Secrets management with Vault and AWS Secrets Manager</li>
+            <li>Practices aligned with PCI-DSS, GDPR and ISO 27001</li>
+            <li>Threat modeling and secure coding against the OWASP Top 10</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="wrap" style="background:none;">
+      <span class="eyebrow">Principles</span>
+      <h2>Engineering principles</h2>
+      <div class="principle-grid">
+        <div>
+          <h4>Architecture</h4>
+          <ul>
+            <li>Start with a minimum viable architecture, build incrementally</li>
+            <li>Design for testability, deployability and observability from day one</li>
+            <li>Decouple deployments from releases</li>
+          </ul>
+        </div>
+        <div>
+          <h4>Security</h4>
+          <ul>
+            <li>Shift left: integrate checks into CI/CD</li>
+            <li>Zero trust: verify every request</li>
+            <li>Defense in depth across multiple layers</li>
+          </ul>
+        </div>
+        <div>
+          <h4>Operations</h4>
+          <ul>
+            <li>Automate toil. If you do it twice, script it</li>
+            <li>Observability over monitoring: understand why things fail</li>
+            <li>Blameless post-mortems that lead to real improvement</li>
+          </ul>
+        </div>
+        <div>
+          <h4>Collaboration</h4>
+          <ul>
+            <li>Documentation is code: ADRs, runbooks, API specs</li>
+            <li>Mentorship through pair programming and code review</li>
+            <li>Agile as a tool, not dogma</li>
+          </ul>
+        </div>
+        <div class="principle-photo media">
+          <img src="static/me.jpeg" alt="Peter Barasa" width="220" height="275" loading="lazy" decoding="async">
+        </div>
+      </div>
+    </section>
+    <section class="page-next wrap" aria-label="Continue exploring">
+      <span class="eyebrow">Continue exploring</span>
+      <div class="page-next-inner">
+        <div>
+          <h2>Browse selected work</h2>
+          <p>See the systems and delivery patterns behind the experience.</p>
+        </div>
+        <a class="btn primary" href="projects.html">Browse selected work <span aria-hidden="true">→</span></a>
+      </div>
+    </section>
+  </main>
+  <footer class="wrap">
+    <div class="footer-inner">
+      <span>Nairobi · On Site</span>
+      <div class="footer-links">
+        <a href="https://github.com/barasapeter" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://bsky.app/profile/barasapeter.bsky.social" target="_blank" rel="noopener">BlueSky</a>
+        <a href="https://x.com/devilmusk" target="_blank" rel="noopener">X</a>
+        <a
+          href="https://cardlabs.cloud/cdn-cgi/l/email-protection#9bf9fae9fae8faebfeeffee9aea9dbfcf6faf2f7b5f8f4f6">Email</a>
+        <a href="tel:+254114068425">+254 114 068 425</a>
+        <a href="tel:+254101860601">+254 101 860 601</a>
+      </div>
+
+    </div>
+  </footer>
+</body>
+
+</html>
