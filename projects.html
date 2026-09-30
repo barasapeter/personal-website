@@ -17,6 +17,7 @@
     href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=Inter:wght@400;500;600&display=swap"
     rel="stylesheet">
   <link rel="stylesheet" href="static/site.css">
+  <link rel="stylesheet" href="static/projects.css">
   <script src="static/site.js" defer></script>
 </head>
 
@@ -102,7 +103,8 @@
         Research
       </a>
       <a href="community.html">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"
+          stroke-linejoin="round" aria-hidden="true">
           <path d="M16 20v-1.5A3.5 3.5 0 0 0 12.5 15h-5A3.5 3.5 0 0 0 4 18.5V20" />
           <circle cx="10" cy="7" r="3" />
           <path d="M17 9a3 3 0 1 0 0-6M20 20v-1.5a3.5 3.5 0 0 0-2.5-3.35" />
@@ -110,7 +112,8 @@
         Community
       </a>
       <a href="articles.html">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"
+          stroke-linejoin="round" aria-hidden="true">
           <path d="M5 3h11l3 3v15H5z" />
           <path d="M8 10h8M8 14h8M8 18h5" />
         </svg>
@@ -142,28 +145,97 @@
   </aside>
   <div class="page-trail wrap" aria-label="You are here">
     <a href="index.html" aria-label="Home">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V10Z" /><path d="M9 21v-7h6v7" /></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+        stroke-linejoin="round" aria-hidden="true">
+        <path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V10Z" />
+        <path d="M9 21v-7h6v7" />
+      </svg>
     </a>
-    <svg class="trail-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m9 18 6-6-6-6" /></svg>
+    <svg class="trail-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+      <path d="m9 18 6-6-6-6" />
+    </svg>
     <span aria-current="page">Selected work</span>
   </div>
   <main id="top">
-<section class="wrap project-section">
+    <section class="wrap project-section">
       <span class="eyebrow">Paid client work</span>
-      <h2>Systems built for real operations</h2>
-      <p class="lede">A concise view of delivery work across education, payments, and merchant operations.</p>
+      <h2>Built for the real world</h2>
+      <p class="lede">Explore projects currently serving real users across education, payments and merchant operations.
+      </p>
       <div class="project-grid">
-        <article class="project-card">
-          <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=1200&q=80" alt="" loading="lazy" decoding="async">
+        <article class="project-card project-card-featured">
+          <div class="project-card-media">
+            <picture>
+              <source media="(max-width: 760px)" srcset="static/projects/cardlabs-horizontal.png">
+              <img src="static/projects/cardlabs-vertical.png"
+                alt="CardLabs coordinator dashboard showing exam-card submissions and payment status" loading="lazy"
+                decoding="async">
+            </picture>
+
+            <span class="project-card-badge">Live</span>
+          </div>
           <div class="project-card-body">
-            <span class="kicker">Education payments</span>
-            <h3>CardLabs student finance platform</h3>
-            <p>A payment and student-services platform built for reliable, mobile-first transactions.</p>
-            <div class="stack-row"><span>M-Pesa</span><span>API security</span><span>Observability</span></div>
+            <div class="project-card-kicker">
+              <span class="kicker">Document operations · Education</span>
+              <span class="project-card-status">Built & deployed</span>
+            </div>
+
+            <h3>CardLabs exam-card coordination platform</h3>
+
+            <p class="project-card-problem">
+              Exam-card collection was being coordinated through WhatsApp, manual
+              payment tracking, and one-by-one printing. CardLabs turns that process
+              into a single operational workflow.
+            </p>
+
+            <div class="project-card-pitch">
+              <strong>One link. One dashboard. One print run.</strong>
+              <span>
+                Students submit their cards, coordinators track the batch and payments,
+                and the system produces one print-ready PDF.
+              </span>
+            </div>
+
+            <div class="project-card-proof">
+              <div>
+                <span>Workflow</span>
+                <strong>Upload → Track → Merge → Print</strong>
+              </div>
+              <div>
+                <span>Infrastructure</span>
+                <strong>AWS + Terraform + OIDC + SSM</strong>
+              </div>
+            </div>
+
+            <div class="stack-row">
+              <span>FastAPI</span>
+              <span>PostgreSQL</span>
+              <span>AWS</span>
+              <span>Terraform</span>
+            </div>
+
+            <div class="project-card-actions">
+              <a href="project-details.html#cardlabs" class="project-card-link">
+                Technical writeup
+                <span aria-hidden="true">↗</span>
+              </a>
+
+              <a href="https://beta.cardlabs.cloud" class="project-card-link project-card-link-primary" target="_blank"
+                rel="noopener">
+                Open live product
+                <span aria-hidden="true">↗</span>
+              </a>
+
+              <a href="https://github.com/barasapeter/cardlabs" class="project-card-link" target="_blank"
+                rel="noopener">
+                GitHub
+                <span aria-hidden="true">↗</span>
+              </a>
+            </div>
           </div>
         </article>
         <article class="project-card">
-          <img src="https://images.unsplash.com/photo-1506399558188-acca6f8cbf41?auto=format&fit=crop&w=1200&q=80" alt="" loading="lazy" decoding="async">
+          <img src="static/projects/cardlabs-landing-page.png" alt="" loading="lazy" decoding="async">
           <div class="project-card-body">
             <span class="kicker">Merchant operations</span>
             <h3>MobiLedger settlement workspace</h3>
@@ -172,7 +244,7 @@
           </div>
         </article>
         <article class="project-card">
-          <img src="https://images.unsplash.com/photo-1719255418097-acf2f18306ce?auto=format&fit=crop&w=1200&q=80" alt="" loading="lazy" decoding="async">
+          <img src="static/projects/cardlabs-landing-page.png" alt="" loading="lazy" decoding="async">
           <div class="project-card-body">
             <span class="kicker">FinTech reliability</span>
             <h3>Kifaru Payments API</h3>
@@ -183,13 +255,13 @@
       </div>
     </section>
 
-<section class="wrap project-section">
+    <section class="wrap project-section">
       <span class="eyebrow">Open source</span>
       <h2>Open-source systems</h2>
       <p class="lede">Reusable technical foundations for secure, observable services.</p>
       <div class="project-grid">
         <article class="project-card">
-          <img src="https://images.unsplash.com/photo-1719255418097-acf2f18306ce?auto=format&fit=crop&w=1200&q=80" alt="" loading="lazy" decoding="async">
+          <img src="static/projects/cardlabs-landing-page.png" alt="" loading="lazy" decoding="async">
           <div class="project-card-body">
             <span class="kicker">Identity</span>
             <h3>Enterprise FinTech Authentication Service</h3>
@@ -198,7 +270,7 @@
           </div>
         </article>
         <article class="project-card">
-          <img src="https://images.unsplash.com/photo-1506399558188-acca6f8cbf41?auto=format&fit=crop&w=1200&q=80" alt="" loading="lazy" decoding="async">
+          <img src="static/projects/cardlabs-landing-page.png" alt="" loading="lazy" decoding="async">
           <div class="project-card-body">
             <span class="kicker">Commerce</span>
             <h3>Cloud-Native E-Commerce Platform</h3>
@@ -207,7 +279,7 @@
           </div>
         </article>
         <article class="project-card">
-          <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=1200&q=80" alt="" loading="lazy" decoding="async">
+          <img src="static/projects/cardlabs-landing-page.png" alt="" loading="lazy" decoding="async">
           <div class="project-card-body">
             <span class="kicker">Operations</span>
             <h3>Production Observability Platform</h3>
@@ -223,7 +295,8 @@
       <div class="page-next-inner">
         <div>
           <h2>Want the technical details?</h2>
-          <p>Explore architecture decisions, delivery constraints, security measures, and operating practices for each project.</p>
+          <p>Explore architecture decisions, delivery constraints, security measures, and operating practices for each
+            project.</p>
         </div>
         <a class="btn primary" href="project-details.html">View more projects <span aria-hidden="true">→</span></a>
       </div>
