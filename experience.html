@@ -16,6 +16,7 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=Inter:wght@400;500;600&display=swap"
     rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
   <link rel="stylesheet" href="static/site.css">
   <script src="static/site.js" defer></script>
 </head>
@@ -102,7 +103,8 @@
         Research
       </a>
       <a href="community.html">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"
+          stroke-linejoin="round" aria-hidden="true">
           <path d="M16 20v-1.5A3.5 3.5 0 0 0 12.5 15h-5A3.5 3.5 0 0 0 4 18.5V20" />
           <circle cx="10" cy="7" r="3" />
           <path d="M17 9a3 3 0 1 0 0-6M20 20v-1.5a3.5 3.5 0 0 0-2.5-3.35" />
@@ -110,7 +112,8 @@
         Community
       </a>
       <a href="articles.html">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"
+          stroke-linejoin="round" aria-hidden="true">
           <path d="M5 3h11l3 3v15H5z" />
           <path d="M8 10h8M8 14h8M8 18h5" />
         </svg>
@@ -142,9 +145,15 @@
   </aside>
   <div class="page-trail wrap" aria-label="You are here">
     <a href="index.html" aria-label="Home">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V10Z" /><path d="M9 21v-7h6v7" /></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+        stroke-linejoin="round" aria-hidden="true">
+        <path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V10Z" />
+        <path d="M9 21v-7h6v7" />
+      </svg>
     </a>
-    <svg class="trail-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m9 18 6-6-6-6" /></svg>
+    <svg class="trail-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+      <path d="m9 18 6-6-6-6" />
+    </svg>
     <span aria-current="page">Experience</span>
   </div>
   <main id="top">
@@ -158,9 +167,9 @@
         important lesson and now my work is implemented around secure API gateways and sturdy design patterns such as
         encryption, idempotency, race conditions, state management, redundancy, recovery sequence and GDPR compliance.
       </div>
-      <p class="lede">My work centers on strict and demanding architectural standards, microservices-driven system
-        design and
-        secure, observable, scalable Ops pipelines.</p>
+      <p class="lede">My work concentrates on strict and demanding architectural standards, microservices-driven
+        architecture and
+        secure, observable, scalable Ops pipelines. I develop and maintain:</p>
       <div class="motive-list">
         <div class="item"><span class="mark">+</span>
           <p>Infrastructure that can serve and support thousands of concurrent user requests with less than one second
@@ -173,7 +182,7 @@
           <p>Security and privacy programs built on upto-date standards adhering to PCI-DSS, KYC/AML, ISO 27001.</p>
         </div>
         <div class="item"><span class="mark">+</span>
-          <p>Systems that monitor themselves such that arising problems are detected before a customer ever feels them.
+          <p>Systems that monitor themselves such that emerging problems are detected before a customer ever feels them.
           </p>
         </div>
       </div>
@@ -218,6 +227,13 @@
               <path d="m9 18 6-6-6-6" />
             </svg>
           </a>
+          <a class="chip" href="https://detail-dev.cardlabs.cloud">
+            Compliance
+            <svg class="chip-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+              stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="m9 18 6-6-6-6" />
+            </svg>
+          </a>
         </div>
         <div class="topics-cta">
           <a class="btn primary" href="https://detail-dev.cardlabs.cloud">
@@ -233,93 +249,13 @@
       </div>
     </section>
 
-    <section id="arsenal" class="wrap">
-      <span class="eyebrow">Toolkit &amp; principles</span>
-      <h2>Technical arsenal</h2>
-      <p class="lede">A working toolkit across cloud infrastructure, backend services, data, security and observability,
-        assembled for financial-grade systems.</p>
-      <div class="arsenal-list">
-        <div class="arsenal-row">
-          <div>
-            <span class="kicker">Cloud &amp; infrastructure</span>
-            <h3>AWS-first, multi-cloud aware</h3>
-            <div class="tools">AWS · Azure · Terraform · Pulumi · Docker · Kubernetes · Helm</div>
-          </div>
-          <ul>
-            <li>Multi-AZ, fault-tolerant architecture on EC2, ECS/EKS, Lambda, RDS and DynamoDB</li>
-            <li>Modularized, drift-checked infrastructure as code across dev, staging and production</li>
-            <li>Blue-green and canary deployments with automated scaling policies</li>
-          </ul>
-        </div>
-        <div class="arsenal-row">
-          <div>
-            <span class="kicker">Backend &amp; APIs</span>
-            <h3>Java, Python, Node and Go</h3>
-            <div class="tools">Spring Boot · FastAPI · NestJS · Go · Rust (learning) · gRPC</div>
-          </div>
-          <ul>
-            <li>High-performance async APIs handling 10,000+ requests per second</li>
-            <li>Real-time systems built on WebSockets and server-sent events</li>
-            <li>Low-latency payment microservices written in Go</li>
-          </ul>
-        </div>
-        <div class="arsenal-row">
-          <div>
-            <span class="kicker">Data layer</span>
-            <h3>Relational, NoSQL and cache</h3>
-            <div class="tools">PostgreSQL · MongoDB · DynamoDB · Redis · Kafka · RabbitMQ</div>
-          </div>
-          <ul>
-            <li>Query optimization for high-transaction systems</li>
-            <li>Event sourcing and CQRS patterns with dead-letter handling</li>
-            <li>Cache invalidation strategies and real-time pub/sub</li>
-          </ul>
-        </div>
-        <div class="arsenal-row">
-          <div>
-            <span class="kicker">DevSecOps &amp; CI/CD</span>
-            <h3>Security built into the pipeline</h3>
-            <div class="tools">GitHub Actions · ArgoCD · Snyk · Trivy · SonarQube</div>
-          </div>
-          <ul>
-            <li>Multi-stage pipelines: test, security scan, then deploy</li>
-            <li>GitOps sync from Git into Kubernetes</li>
-            <li>Automated rollback on deployment failure</li>
-          </ul>
-        </div>
-        <div class="arsenal-row">
-          <div>
-            <span class="kicker">Observability &amp; SRE</span>
-            <h3>Understanding why, not just when</h3>
-            <div class="tools">Prometheus · Grafana · ELK · OpenTelemetry · Jaeger</div>
-          </div>
-          <ul>
-            <li>SLI, SLO and SLA definition and tracking</li>
-            <li>Distributed tracing across microservices</li>
-            <li>ML-assisted anomaly detection and root-cause analysis</li>
-          </ul>
-        </div>
-        <div class="arsenal-row">
-          <div>
-            <span class="kicker">Security &amp; identity</span>
-            <h3>Zero trust, defense in depth</h3>
-            <div class="tools">OAuth2/OIDC · JWT · Vault · RBAC/ABAC · WAF</div>
-          </div>
-          <ul>
-            <li>Secrets management with Vault and AWS Secrets Manager</li>
-            <li>Practices aligned with PCI-DSS, GDPR and ISO 27001</li>
-            <li>Threat modeling and secure coding against the OWASP Top 10</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
     <section class="wrap" style="background:none;">
-      <span class="eyebrow">Principles</span>
-      <h2>Engineering principles</h2>
+      <span class="eyebrow">Engineering Principles</span>
+      <h2>My Engineering principles</h2>
       <div class="principle-grid">
         <div>
-          <h4>Architecture</h4>
+
+          <h4><i class="fa-solid fa-sitemap pr"></i> Architecture</h4>
           <ul>
             <li>Start with a minimum viable architecture, build incrementally</li>
             <li>Design for testability, deployability and observability from day one</li>
@@ -327,7 +263,7 @@
           </ul>
         </div>
         <div>
-          <h4>Security</h4>
+          <h4><i class="fa-solid fa-shield-halved pr"></i> Security</h4>
           <ul>
             <li>Shift left: integrate checks into CI/CD</li>
             <li>Zero trust: verify every request</li>
@@ -335,7 +271,7 @@
           </ul>
         </div>
         <div>
-          <h4>Operations</h4>
+          <h4><i class="fa-solid fa-gears pr"></i> Operations</h4>
           <ul>
             <li>Automate toil. If you do it twice, script it</li>
             <li>Observability over monitoring: understand why things fail</li>
@@ -343,7 +279,7 @@
           </ul>
         </div>
         <div>
-          <h4>Collaboration</h4>
+          <h4><i class="fa-solid fa-people-group pr"></i> Collaboration</h4>
           <ul>
             <li>Documentation is code: ADRs, runbooks, API specs</li>
             <li>Mentorship through pair programming and code review</li>
@@ -356,11 +292,11 @@
       </div>
     </section>
     <section class="page-next wrap" aria-label="Continue exploring">
-      <span class="eyebrow">Continue exploring</span>
+      <span class="eyebrow">Projects</span>
       <div class="page-next-inner">
         <div>
-          <h2>Browse selected work</h2>
-          <p>See the systems and delivery patterns behind the experience.</p>
+          <h2>Selected work</h2>
+          <p>See how I turn Multifaceted problems into shipped products.</p>
         </div>
         <a class="btn primary" href="projects.html">Browse selected work <span aria-hidden="true">→</span></a>
       </div>
