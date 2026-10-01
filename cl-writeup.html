@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CardLabs writeup</title>
+    <link rel="icon" href="static/favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="32x32" href="static/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="static/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="static/apple-touch-icon.png">
+    <style>
+        :root {
+            --bg: #ffffff;
+            --bg-soft: #f7f6f3;
+            --surface: #ffffff;
+            --ink: #1c2024;
+            --ink-soft: #565c65;
+            --ink-faint: #90959d;
+            --line: #e4e1da;
+            --accent: #ee363d;
+            --accent-soft: #eef1f4;
+            --gold: #a2793f;
+            --gold-soft: #f4ede1;
+            --shadow: 0 1px 2px rgba(28, 32, 36, 0.04), 0 6px 20px rgba(28, 32, 36, 0.05);
+            --radius: 8px;
+            --font-serif: "Source Serif 4", Georgia, "Times New Roman", serif;
+            --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            color-scheme: light;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--ink);
+            font-family: var(--font-serif);
+            font-size: 1.125rem;
+            line-height: 1.7;
+            padding: 3rem 2rem 6rem;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4 {
+            font-family: var(--font-sans);
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            line-height: 1.25;
+            color: var(--ink);
+        }
+
+        h1 {
+            font-size: 2.6rem;
+            letter-spacing: -0.03em;
+            margin-bottom: 1rem;
+        }
+
+        h2 {
+            font-size: 1.9rem;
+            margin-top: 2.8rem;
+            margin-bottom: 1.2rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--line);
+        }
+
+        h3 {
+            font-size: 1.4rem;
+            margin-top: 2rem;
+            margin-bottom: 0.8rem;
+            color: var(--ink);
+        }
+
+        h4 {
+            font-size: 1.2rem;
+            margin-top: 1.6rem;
+            margin-bottom: 0.6rem;
+            color: var(--ink-soft);
+        }
+
+        p {
+            margin-bottom: 1.3rem;
+        }
+
+        a {
+            color: var(--accent);
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.15s;
+        }
+
+        a:hover {
+            border-bottom-color: var(--accent);
+        }
+
+        strong {
+            font-weight: 600;
+            color: var(--ink);
+        }
+
+        .content {
+            max-width: 860px;
+            margin: 0 auto;
+        }
+
+        pre {
+            background: var(--bg-soft);
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            padding: 1.2rem 1.5rem;
+            overflow-x: auto;
+            font-family: "SF Mono", "Fira Code", "Fira Mono", "Roboto Mono", monospace;
+            font-size: 0.85rem;
+            line-height: 1.6;
+            color: var(--ink);
+            margin: 1.5rem 0 2rem;
+            box-shadow: var(--shadow);
+            tab-size: 2;
+        }
+
+        code {
+            font-family: "SF Mono", "Fira Code", "Fira Mono", "Roboto Mono", monospace;
+            font-size: 0.85em;
+            background: var(--accent-soft);
+            padding: 0.15em 0.4em;
+            border-radius: 4px;
+            color: var(--ink);
+        }
+
+        pre code {
+            background: none;
+            padding: 0;
+            font-size: inherit;
+            border-radius: 0;
+        }
+
+        blockquote {
+            border-left: 3px solid var(--gold);
+            background: var(--gold-soft);
+            padding: 1rem 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 var(--radius) var(--radius) 0;
+            font-style: italic;
+            color: var(--ink-soft);
+        }
+
+        blockquote p:last-child {
+            margin-bottom: 0;
+        }
+
+        ul,
+        ol {
+            margin: 1rem 0 1.5rem 1.5rem;
+        }
+
+        li {
+            margin-bottom: 0.4rem;
+        }
+
+        hr {
+            border: none;
+            border-top: 1px solid var(--line);
+            margin: 3rem 0;
+        }
+
+        .small-meta {
+            font-family: var(--font-sans);
+            font-size: 0.8rem;
+            color: var(--ink-faint);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .code-label {
+            display: inline-block;
+            font-family: var(--font-sans);
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.04em;
+            color: var(--accent);
+            background: var(--accent-soft);
+            padding: 0.3rem 0.75rem;
+            border-radius: 100px;
+            margin-bottom: 0.5rem;
+            margin-top: 1.75rem;
+            border: 1px solid rgba(238, 54, 61, 0.15);
+        }
+
+        .note {
+            font-family: var(--font-sans);
+            font-size: 0.85rem;
+            color: var(--ink-soft);
+            background: var(--accent-soft);
+            padding: 0.6rem 1rem;
+            border-radius: var(--radius);
+            border-left: 3px solid var(--accent);
+            margin: 1.5rem 0;
+        }
+
+        .section {
+            scroll-margin-top: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                font-size: 1rem;
+                padding: 2rem 1.25rem 4rem;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+
+            h3 {
+                font-size: 1.2rem;
+            }
+
+            pre {
+                padding: 1rem;
+                font-size: 0.78rem;
+                border-radius: 6px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                font-size: 0.95rem;
+                padding: 1.5rem 1rem 3rem;
+            }
+
+            h1 {
+                font-size: 1.7rem;
+            }
+        }
+
+        @media print {
+            body {
+                font-size: 11pt;
+                padding: 0;
+            }
+
+            pre {
+                border: 1px solid #ccc;
+                box-shadow: none;
+                break-inside: avoid;
+            }
+
+            h2 {
+                break-after: avoid;
+            }
+
+            .code-label {
+                border: 1px solid #ccc;
+                background: #f0f0f0;
+                color: #333;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="content">
+
+        <section id="intro" class="section">
+            <h1>What is CardLabs from an engineering perspective, at least?</h1>
+            <p>Let's understand the pain first.</p>
+            <p>Students had a problem they didn't even know existed. It all started a week before exams.</p>
+            <p>Every student needs a stamped exam card to sit an exam. The process: log into the portal, download the
+                PDF, print it, get it stamped at the department office. Simple enough, until you factor in 60 students,
+                one class rep and a WhatsApp group.</p>
+            <p>Students far from campus couldn't deliver their cards in person, so they sent PDFs over WhatsApp. The rep
+                printed each one, tracked who had paid for printing, chased missing submissions and made the trip to the
+                office. It worked, but barely. One rep, sixty people, one chat, zero structure.</p>
+            <p>The real problem wasn't the exam card. It was coordination at scale.</p>
+            <p>What they needed was a tool/system/utility that could: accept files from many students independently,
+                track submission and payment state per person, and consolidate everything into a single output - without
+                the rep holding it all together manually.</p>
+            <p>That sounds simple enough, until it's not.</p>
+            <p>How do you even start building such a thing? I asked myself. All I knew was some little programming, I'd
+                built simple command-line interface applications with Python. I wasn't even a CRUD monkey yet, I was
+                practically a beginner.</p>
+
+            <pre><code>print("Hello, World!") # Good old days!
+Hello, World!</code></pre>
+
+            <p>What I didn't know is how fast I would end up writing hundreds of lines of YAML, spinning Docker
+                containers, wiring up CI/CD pipelines and learning what it actually means to deploy something that real
+                people depend on. I went from <code>print("Hello, World!")</code> to provisioning infrastructure,
+                managing secrets, managing states, handling concurrent file uploads at scale, integrating external APIs
+                like Daraja for payments and OIDC + SSM for auth and config, building web crawlers that logged into
+                external systems and retrieved files on behalf of users, and designing a backend that could parse,
+                normalize and merge thousands of files without breaking a sweat. CardLabs didn't just solve a problem
+                for students, it turned me into an engineer.</p>
+        </section>
+
+        <section id="server" class="section">
+            <h2>1. Firing up the server</h2>
+            <p>Coming from a Python background, the first server I ever fired up was Flask. It was familiar, simple and
+                got me moving. But CardLabs wasn't a simple app, it was handling concurrent file uploads, background PDF
+                processing, and external API calls that could block for seconds at a time. Flask's synchronous nature
+                meant every request held a thread hostage until it finished. At scale, that would leave clients waiting
+                and frustrated.</p>
+            <p>So I switched to FastAPI. Native async/await support meant I could handle multiple uploads concurrently
+                without spinning up a thread per request. It gave me async endpoints out of the box, automatic request
+                validation through Pydantic, and a performance profile that actually matched the workload. For an
+                I/O-bound application like CardLabs where the bottleneck is network calls, file reads, and API
+                round-trips, not CPU, FastAPI wasn't just nicer. It was the right tool.</p>
+
+            <span class="code-label">Flask: Synchronous File Upload</span>
+            <pre><code># app.py - Flask
+from flask import Flask, request, jsonify
+import os
+import time
+
+app = Flask(__name__)
+UPLOAD_DIR = "uploads"
+os.makedirs(UPLOAD_DIR, exist_ok=True)
+
+
+@app.route("/upload", methods=["POST"])
+def upload_exam_card():
+    """
+    Handle a single exam card upload.
+
+    BOTTLENECK #1: Flask runs this function synchronously.
+    While this request is being processed, the worker thread
+    is fully occupied. No other request can be served by this
+    thread until the function returns.
+    """
+    if "file" not in request.files:
+        return jsonify({"error": "No file provided"}), 400
+
+    file = request.files["file"]
+
+    # BOTTLENECK #2: File I/O blocks the thread.
+    # save() is synchronous, the server waits for the disk write
+    # to complete before moving on. Under concurrent uploads from
+    # 60 students, these calls queue up one after another.
+    filepath = os.path.join(UPLOAD_DIR, file.filename)
+    file.save(filepath)
+
+    # BOTTLENECK #3: External I/O blocks the thread.
+    # If we needed to validate the PDF, call an external API,
+    # or notify the class rep, every one of those calls would
+    # freeze this thread until the response came back.
+    # time.sleep(2) simulates a slow external call.
+    time.sleep(2)  # e.g., payment verification via Daraja
+
+    return jsonify({"status": "uploaded", "file": file.filename}), 200
+
+
+# To handle 60 concurrent uploads, Flask needs 60 worker threads
+# (or a WSGI server like Gunicorn with enough workers).
+# Threads are expensive, and each one sits idle during I/O.</code></pre>
+
+            <span class="code-label">FastAPI: Asynchronous File Upload</span>
+            <pre><code># main.py - FastAPI
+from fastapi import FastAPI, UploadFile, File, HTTPException
+import aiofiles
+import asyncio
+import os
+
+app = FastAPI()
+UPLOAD_DIR = "uploads"
+os.makedirs(UPLOAD_DIR, exist_ok=True)
+
+
+@app.post("/upload")
+async def upload_exam_card(file: UploadFile = File(...)):
+    """
+    Handle a single exam card upload.
+
+    ADVANTAGE #1: Native async support.
+    The `async def` declaration tells FastAPI (and the underlying
+    ASGI server, e.g., Uvicorn) that this endpoint can yield control
+    back to the event loop during I/O operations. Other requests
+    are served while this one waits.
+    """
+    if not file.filename.endswith(".pdf"):
+        raise HTTPException(status_code=400, detail="Only PDFs allowed")
+
+    # ADVANTAGE #2: Non-blocking file I/O.
+    # aiofiles writes to disk asynchronously. While the write
+    # is in progress, the event loop handles other students'
+    # uploads. No thread sits idle waiting for the disk.
+    filepath = os.path.join(UPLOAD_DIR, file.filename)
+    async with aiofiles.open(filepath, "wb") as out_file:
+        content = await file.read()
+        await out_file.write(content)
+
+    # ADVANTAGE #3: Non-blocking external calls.
+    # httpx.AsyncClient allows us to await external APIs
+    # (e.g., Daraja payment verification, OIDC token exchange)
+    # without blocking the event loop.
+    await asyncio.sleep(2)  # simulates async Daraja call
+
+    return {"status": "uploaded", "file": file.filename}
+
+
+# ADVANTAGE #4: Automatic validation.
+# FastAPI uses Pydantic to validate the incoming request.
+# If `file` isn't a valid upload, the request is rejected
+# before our code even runs, no manual checks needed.
+
+
+# ADVANTAGE #5: Built-in OpenAPI docs.
+# FastAPI auto-generates /docs and /redoc endpoints.
+# You can test uploads directly from the browser during dev.</code></pre>
+
+            <pre><code># Flask equivalent, sequential and blocking
+@app.route("/sessions/&lt;session_id&gt;/merge", methods=["POST"])
+def merge_exam_cards(session_id):
+    """
+    BOTTLENECK: Files are read one at a time.
+    With 60 files, that's 60 sequential disk reads.
+    The worker thread is blocked for the entire duration.
+    """
+    session_dir = os.path.join(UPLOAD_DIR, session_id)
+    files = sorted(os.listdir(session_dir))
+    pdf_contents = []
+
+    for f in files:
+        with open(os.path.join(session_dir, f), "rb") as fh:
+            pdf_contents.append(fh.read())  # blocks each iteration
+
+    merged = merge_pdfs(pdf_contents)
+    output_path = os.path.join(session_dir, "merged.pdf")
+
+    with open(output_path, "wb") as out:
+        out.write(merged)
+
+    return jsonify({"merged": output_path, "count": len(files)})</code></pre>
+
+            <p>The snippets above aren't really about Flask versus FastAPI. They're a conceptual demonstration of how
+                asynchronous event handling works and why it matters beyond a single upload endpoint. The same
+                async/await pattern that keeps an upload from blocking the server also powers payment verification
+                through Daraja, OIDC token exchange, SSM config retrieval, crawler authentication into external systems,
+                and the concurrent merge pipeline that stitches dozens to hundreds of files together. Every one of those
+                operations is I/O-bound, and every one of them would otherwise stall a worker thread while waiting on
+                something outside the application's control. FastAPI's native async support gave me a single, consistent
+                model for handling all of them. one event loop, many concurrent operations, no thread-per-request
+                overhead. That consistency is what made it possible to build CardLabs as a system where uploads,
+                payments, auth, crawling and merging all run on the same asynchronous backbone without stepping on each
+                other.</p>
+        </section>
+
+        <section id="state" class="section">
+            <h2>2. State Management</h2>
+            <p>How do you ensure the uploaded file is sent to the right co-ordinator?</p>
+            <p>CardLabs answers that with a workflow-first data model. A file is never treated as a loose upload; it is
+                attached to the class collection that received it, the representative responsible for that class, and a
+                durable exam-card record. From that point, the card carries its own state: who submitted it, the
+                extracted student metadata, whether a payment was initiated or confirmed, and whether it has moved
+                through printing and stamping.</p>
+            <p>That state lives in PostgreSQL, not in a browser session or a message thread. Each workflow transition is
+                persisted alongside an audit event, so the representative can see the status of the whole class while
+                administrators can investigate a particular card when something goes wrong. The database becomes the
+                coordination layer that WhatsApp could never be.</p>
+            <p>For changes with financial or operational consequences, CardLabs uses explicit transaction boundaries and
+                process locks. This protects important actions from overlapping requests and gives the system a
+                controlled way to reject or review work that is already in progress. The result is that a card always
+                has a clear destination: one class, one collection workflow, one evolving record of truth.</p>
+            <p>The pattern below is deliberately simplified, but it captures the important part: state changes are
+                committed together and an audit event is created in the same unit of work.</p>
+
+            <pre><code># Illustrative pattern, names, fields, and rules are intentionally redacted.
+async def attach_document(session, collection_id, document):
+    collection = await repository.collection_for_update(session, collection_id)
+    if collection.status != "accepting":
+        raise WorkflowClosed()
+
+    record = DocumentRecord(collection_id=collection.id, state="submitted")
+    audit = AuditEvent(subject=record, action="document_submitted")
+    session.add_all([record, audit])
+    await session.commit()      # Record and audit event succeed or fail together.</code></pre>
+
+            <p><code>collection_for_update</code> represents a database row lock. It is not a Python-only mutex: it
+                protects the critical section across application workers, which matters when two web requests arrive at
+                the same time.</p>
+        </section>
+
+        <section id="payment" class="section">
+            <h2>3. Payment Integration</h2>
+            <p>Printing is only manageable at scale when payment is attached to the same workflow as the document.
+                CardLabs integrates with Safaricom Daraja to initiate M-PESA STK payments for student submissions and to
+                support downstream payout workflows where required. The payment request is associated with the exam-card
+                record before the student completes the payment on their phone, creating a reliable link between the
+                request, the provider reference, and the card it concerns.</p>
+            <p>The system does not treat a payment prompt as proof of payment. It waits for the provider callback,
+                resolves it against the recorded checkout reference, and then updates the card's payment state. The
+                callback is durably captured before business processing begins, including the provider identifiers,
+                request context, processing result, and any processing error. Sensitive request headers are redacted
+                from the audit record.</p>
+            <p>This gives the operations side of the platform something that is easy to underestimate: a trail. If a
+                callback arrives late, a user asks about a payment, or a provider response needs review, the team can
+                trace the event without relying on screenshots or manually searched chats.</p>
+            <p>The webhook pattern is intentionally two-stage. First record the external event durably; then run the
+                workflow logic. If processing fails after receipt, the system still has evidence of the event and can
+                safely investigate or replay it.</p>
+
+            <pre><code># Illustrative callback boundary, no provider URLs or live fields shown.
+async def payment_callback(request, session):
+    payload = await request.json()
+    callback = await audit_store.record(
+        session=session,
+        payload=payload,
+        headers=redact(request.headers, {"authorization", "cookie"}),
+        status="received",
+    )
+
+    try:
+        await payments.apply_provider_result(session, payload)
+        await audit_store.finish(session, callback.id, status="processed")
+    except Exception as exc:
+        await audit_store.finish(session, callback.id, status="failed", error=str(exc))
+        raise</code></pre>
+
+            <p>The business state is advanced from the callback result, not from the initial browser request. That
+                distinction prevents an accepted prompt from being confused with a completed payment.</p>
+        </section>
+
+        <section id="idempotency" class="section">
+            <h2>4. Idempotency</h2>
+            <p>Idempotency is what keeps a shaky connection from becoming a duplicate operational problem. If a student
+                refreshes after an upload, retries after a timeout, or submits the same card twice, the system must
+                reach the same safe end state instead of creating a second card, a second payment path, or another item
+                in the print batch.</p>
+            <p>The first line of defence is a cryptographic file fingerprint. CardLabs calculates a SHA-256 digest from
+                the original PDF bytes and stores that digest with the card record. The digest is scoped to the class
+                collection, so the platform identifies the same card arriving again while allowing different students
+                and collections to operate independently.</p>
+            <p>On a matching hash, CardLabs returns the established card record and preserves its payment, printing, and
+                stamping state. It does not create another document row, write another copy of the file, open another
+                payment path, or add a second item to a print batch. A new digest continues through validation, durable
+                file storage, metadata extraction, workflow-record creation, and audit logging.</p>
+            <p>The duplicate gate reads the file in chunks, which gives the same result for large documents without
+                loading the whole PDF into application memory. The database enforces the collection-and-hash
+                relationship as the final concurrency guard.</p>
+
+            <pre><code># Illustrative file-hash duplicate gate, names and fields are redacted.
+digest = hashlib.sha256()
+temporary_path = await storage.create_temporary_path()
+
+async with storage.open_for_write(temporary_path) as destination:
+    while block := await upload.read(1024 * 1024):
+        digest.update(block)
+        await destination.write(block)
+
+file_hash = digest.hexdigest()
+final_path = storage.collection_path(collection.id, file_hash=file_hash)
+existing = await repository.find_document_by_hash(
+    collection_id=collection.id,
+    file_hash=file_hash,
+)
+if existing:
+    await storage.remove(temporary_path)
+    return existing                         # Same card: preserve its existing workflow.
+
+await storage.promote_atomically(temporary_path, final_path)
+session.add(DocumentRecord(collection_id=collection.id, file_hash=file_hash))
+await session.commit()</code></pre>
+
+            <pre><code>-- Illustrative invariant: concurrent uploads cannot create two copies.
+UNIQUE (collection_id, file_hash)</code></pre>
+        </section>
+
+        <section id="caching" class="section">
+            <h2>5. Caching</h2>
+            <p>CardLabs caches M-PESA access tokens in Redis for 40 minutes. The cache is shared outside the application
+                process, so concurrent application workers use the same valid credential instead of each requesting a
+                fresh token from the provider. This short-lived cache reduces token-endpoint traffic and keeps payment
+                initiation focused on the student transaction rather than repeated credential acquisition.</p>
+            <p>The cache key contains only the access token; it does not hold payment requests, card records, student
+                PDFs, or callback payloads. Expiry is part of the key's lifecycle: after 40 minutes, Redis removes the
+                entry and the next request obtains and stores a fresh token.</p>
+
+            <pre><code># Illustrative cache-aside access-token flow.
+TOKEN_KEY = "payments:mpesa:access-token"
+TOKEN_TTL_SECONDS = 40 * 60
+
+async def get_access_token() -> str:
+    if token := await redis.get(TOKEN_KEY):
+        return token                         # Cache hit: use the shared credential.
+
+    token = await provider.request_token()
+    await redis.set(TOKEN_KEY, token, ex=TOKEN_TTL_SECONDS)
+    return token                             # Cache miss: fetch once, then share.</code></pre>
+
+            <p>This cache-aside flow keeps token retrieval deterministic: cache hit returns immediately, cache miss
+                obtains one provider credential, and TTL expiry naturally rotates it without placing long-lived
+                credentials in application memory.</p>
+        </section>
+
+        <section id="retry" class="section">
+            <h2>6. Retry Mechanisms</h2>
+            <p>External systems fail in ordinary ways: a remote portal slows down, a network packet is lost, or a
+                provider has a short outage. CardLabs treats those failures as operational conditions rather than
+                assuming every request will succeed on the first attempt.</p>
+            <p>For student-portal document retrieval, the service uses a bounded retry policy of three attempts with a
+                two-second delay between failed requests. The policy is intentionally limited: it gives a transient
+                issue time to recover without holding a request open indefinitely or repeatedly stressing an unavailable
+                dependency. When all attempts fail, the student receives a clear manual-upload fallback instead of an
+                opaque error.</p>
+            <p>Payment operations are handled differently because retrying a financial command blindly can create
+                duplicate effects. M-PESA requests are bounded by HTTP timeouts, callbacks are recorded for audit, and
+                operational retry flows retain their transaction history and provider conversation identifiers. A
+                timeout therefore becomes a reviewable workflow state, not a reason to fire an identical payment request
+                without context. User verification messages are also rate-limited through a retry window to prevent
+                repeated requests from becoming abuse or accidental spam.</p>
+            <p>The document-retrieval policy looks like this in principle. Only transport-level failure is retried; a
+                well-formed business rejection is returned immediately. This distinction avoids turning every error into
+                unnecessary load on an external dependency.</p>
+
+            <pre><code># Simplified bounded retry policy used for remote document retrieval.
+for attempt in range(1, 4):
+    try:
+        return await remote_portal.fetch_document(timeout=30)
+    except TransientNetworkError:
+        if attempt == 3:
+            raise RemoteServiceUnavailable()
+        await asyncio.sleep(2)</code></pre>
+
+            <p>Retries are therefore part of a failure policy, not a substitute for it: each one has a limit, a timeout,
+                and a defined fallback.</p>
+        </section>
+
+        <section id="encryption" class="section">
+            <h2>7. Encryption</h2>
+            <p>Security begins with reducing what can be exposed. Secrets such as database credentials, OAuth client
+                credentials, M-PESA keys, and session secrets are supplied as environment-managed configuration rather
+                than committed application values. Passwords are stored using bcrypt hashing, so the original password
+                is not recoverable from the database.</p>
+            <p>In transit, public traffic is terminated over HTTPS at the Nginx edge and certificates are managed
+                through Certbot. Session cookies are signed, have a controlled lifetime, use <code>SameSite=Lax</code>,
+                and are marked secure outside development. The application also sets browser-facing protections such as
+                HSTS in production, frame controls, content-type protection, and restrictive permissions and referrer
+                policies. TLS certificate verification remains enabled by default when CardLabs communicates with the
+                student portal.</p>
+            <p>At rest, the operational baseline uses a dedicated non-root application account, protected database
+                credentials, and persistent runtime volumes separated from the source image. The database and document
+                stores have distinct operational boundaries, which keeps workflow data durable across
+                application-container replacement.</p>
+            <p>The application also keeps CPU-expensive password hashing away from the async event loop. That small
+                implementation detail keeps unrelated requests available while cryptographic work runs.</p>
+
+            <pre><code># Illustrative security boundary.
+async def create_account(plain_password: str):
+    validate_password_strength(plain_password)
+    password_hash = await run_in_worker_thread(bcrypt_hash, plain_password)
+    return Account(password_hash=password_hash)</code></pre>
+
+            <p>At the web edge, one policy layer consistently applies transport and browser protections:</p>
+
+            <pre><code>HTTPS -> reverse proxy -> application
+  └─ redirect cleartext traffic, terminate TLS, forward trusted request metadata
+
+application response
+  └─ signed secure session cookie + HSTS + frame/referrer/content-type protections</code></pre>
+        </section>
+
+        <section id="deploy" class="section">
+            <h2>8. Cloud-Native Deployment and Operations</h2>
+            <p>CardLabs is deployed as a repeatable service rather than as a manually maintained server process.
+                Terraform provisions the instance, then a bootstrap workflow configures the host, installs the required
+                runtime dependencies, retrieves the application, creates the database, and registers the API as a
+                managed system service. Nginx sits in front of the FastAPI application as the public reverse proxy,
+                while Gunicorn and Uvicorn workers manage the application process behind the local bind address.</p>
+            <p>The deployment sequence is intentionally boring and repeatable: provision infrastructure, inject
+                environment-specific secrets, prepare PostgreSQL, run migrations, start the service, validate health,
+                configure the reverse proxy, and enable TLS certificate renewal. The service is configured to restart
+                after failure, while the database starts before the application. This makes restarts and routine updates
+                operational events rather than hand-crafted recovery exercises.</p>
+            <p>For container-based development and portable deployment, Docker Compose provides the FastAPI service and
+                PostgreSQL with health checks and persistent volumes. Mutable data including uploads, user settings, and
+                M-PESA callback records is not treated as source code. It is mounted as runtime storage alongside the
+                PostgreSQL workflow store.</p>
+            <p>The production access model uses managed administration, with AWS Systems Manager available for
+                controlled host access. Logging, callback audit records, transaction histories, and service-manager
+                journals provide the operational evidence needed to diagnose failures.</p>
+            <p>The runtime responsibilities are separated so that a failed component has a clear recovery boundary:</p>
+
+            <pre><code>Terraform                 provisions compute and network resources
+Bootstrap                 prepares the host and installs the service
+systemd                   supervises the application process and restarts it
+Nginx + Certbot           terminate TLS and renew certificates
+FastAPI / Uvicorn         serve asynchronous application traffic
+PostgreSQL                persists workflow and audit state
+Docker volumes / backups  preserve runtime documents and callback artifacts</code></pre>
+
+            <p>In practical terms, a healthy deployment is not just "the homepage loads." It means the service manager
+                reports the process as healthy, the application health endpoint responds, PostgreSQL is reachable, TLS
+                is valid, and the persistent stores are included in the recovery plan.</p>
+        </section>
+
+    </div>
+
+</body>
+
+</html>
